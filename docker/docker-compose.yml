@@ -1,6 +1,6 @@
 services:
   lldap:
-    image: lldap/lldap:latest
+    image: lldap/lldap:stable
     container_name: lldap
     ports:
       - "3890:3890"
@@ -42,7 +42,7 @@ services:
     restart: unless-stopped
 
   keycloak:
-    image: quay.io/keycloak/keycloak:26.0
+    image: quay.io/keycloak/keycloak:26.6.1
     container_name: keycloak
     command: start-dev
     ports:

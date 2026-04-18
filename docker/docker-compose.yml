@@ -1,0 +1,25 @@
+services:
+  lldap:
+    image: lldap/lldap:latest
+    container_name: lldap
+    ports:
+      - "3890:3890"   # LDAP
+      - "17170:17170" # Web UI
+    environment:
+      - LLDAP_LDAP_BASE_DN=${LLDAP_LDAP_BASE_DN}
+      - LLDAP_LDAP_USER_DN=${LLDAP_ADMIN_USERNAME}
+      - LLDAP_LDAP_USER_PASS=${LLDAP_ADMIN_PASSWORD}
+      - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
+      - TZ=Europe/Amsterdam
+    volumes:
+      - lldap-data:/data
+    networks:
+      - ldap-net
+    restart: unless-stopped
+
+volumes:
+  lldap-data:
+
+networks:
+  ldap-net:
+    driver: bridge

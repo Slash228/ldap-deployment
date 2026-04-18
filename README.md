@@ -29,14 +29,16 @@ docker compose up -d
 ```
 
 ## Project Structure
+```text
 .
-├── docker/          # docker-compose and per-service configs
+├── docker/                 # docker-compose and per-service configs
 ├── scripts/
-│   ├── seed/        # user/group provisioning scripts
-│   └── validation/  # automated validation scenarios
-├── docs/            # diagrams and screenshots
-├── report/          # IMRaD report sources and PDF
-└── logs/examples/   # captured logs for the report
+│   ├── seed/               # user/group provisioning scripts
+│   └── validation/         # automated validation scenarios
+├── docs/                   # diagrams and screenshots
+├── report/                 # IMRaD report sources and PDF
+└── logs/examples/          # captured logs for the report
+```
 ## License
 
 MIT

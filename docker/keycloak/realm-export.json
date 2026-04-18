@@ -1,0 +1,180 @@
+{
+    "id": "dnp-realm",
+    "realm": "dnp-realm",
+    "displayName": "DNP Realm",
+    "enabled": true,
+    "sslRequired": "none",
+    "registrationAllowed": false,
+    "loginWithEmailAllowed": true,
+    "duplicateEmailsAllowed": false,
+    "resetPasswordAllowed": false,
+    "editUsernameAllowed": false,
+    "defaultSignatureAlgorithm": "RS256",
+    "accessTokenLifespan": 300,
+    "ssoSessionIdleTimeout": 1800,
+    "ssoSessionMaxLifespan": 36000,
+    "eventsEnabled": true,
+    "eventsListeners": ["jboss-logging"],
+    "adminEventsEnabled": true,
+    "adminEventsDetailsEnabled": true,
+    "clients": [
+      {
+        "clientId": "demo-app",
+        "name": "Demo Application",
+        "description": "OIDC client for demo application with RBAC",
+        "rootUrl": "http://localhost:3000",
+        "adminUrl": "http://localhost:3000",
+        "baseUrl": "http://localhost:3000",
+        "enabled": true,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "demo-app-secret",
+        "redirectUris": [
+          "http://localhost:3000/*"
+        ],
+        "webOrigins": [
+          "http://localhost:3000"
+        ],
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": true,
+        "protocol": "openid-connect",
+        "attributes": {
+          "oidc.ciba.grant.enabled": "false",
+          "oauth2.device.authorization.grant.enabled": "false",
+          "backchannel.logout.session.required": "true"
+        },
+        "protocolMappers": [
+          {
+            "name": "group-membership-mapper",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-group-membership-mapper",
+            "consentRequired": false,
+            "config": {
+              "full.path": "false",
+              "introspection.token.claim": "true",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "groups",
+              "userinfo.token.claim": "true"
+            }
+          }
+        ],
+        "defaultClientScopes": [
+          "web-origins",
+          "acr",
+          "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      }
+    ],
+    "components": {
+      "org.keycloak.storage.UserStorageProvider": [
+        {
+          "name": "lldap-provider",
+          "providerId": "ldap",
+          "config": {
+            "vendor": ["other"],
+            "connectionUrl": ["ldap://lldap:3890"],
+            "bindDn": ["uid=admin,ou=people,dc=dnp,dc=local"],
+            "bindCredential": ["changeme_strong_password"],
+            "usersDn": ["ou=people,dc=dnp,dc=local"],
+            "usernameLDAPAttribute": ["uid"],
+            "rdnLDAPAttribute": ["uid"],
+            "uuidLDAPAttribute": ["uid"],
+            "userObjectClasses": ["inetOrgPerson"],
+            "editMode": ["READ_ONLY"],
+            "syncRegistrations": ["false"],
+            "importEnabled": ["true"],
+            "batchSizeForSync": ["1000"],
+            "fullSyncPeriod": ["-1"],
+            "changedSyncPeriod": ["-1"],
+            "searchScope": ["2"],
+            "useTruststoreSpi": ["ldapsOnly"],
+            "connectionPooling": ["true"],
+            "pagination": ["true"],
+            "allowKerberosAuthentication": ["false"],
+            "useKerberosForPasswordAuthentication": ["false"],
+            "enabled": ["true"],
+            "priority": ["0"],
+            "cachePolicy": ["DEFAULT"]
+          },
+          "subComponents": {
+            "org.keycloak.storage.ldap.mappers.LDAPStorageMapper": [
+              {
+                "name": "username",
+                "providerId": "user-attribute-ldap-mapper",
+                "config": {
+                  "ldap.attribute": ["uid"],
+                  "user.model.attribute": ["username"],
+                  "is.mandatory.in.ldap": ["true"],
+                  "read.only": ["true"],
+                  "always.read.value.from.ldap": ["false"]
+                }
+              },
+              {
+                "name": "email",
+                "providerId": "user-attribute-ldap-mapper",
+                "config": {
+                  "ldap.attribute": ["mail"],
+                  "user.model.attribute": ["email"],
+                  "is.mandatory.in.ldap": ["false"],
+                  "read.only": ["true"],
+                  "always.read.value.from.ldap": ["false"]
+                }
+              },
+              {
+                "name": "first name",
+                "providerId": "user-attribute-ldap-mapper",
+                "config": {
+                  "ldap.attribute": ["givenName"],
+                  "user.model.attribute": ["firstName"],
+                  "is.mandatory.in.ldap": ["false"],
+                  "read.only": ["true"],
+                  "always.read.value.from.ldap": ["false"]
+                }
+              },
+              {
+                "name": "last name",
+                "providerId": "user-attribute-ldap-mapper",
+                "config": {
+                  "ldap.attribute": ["sn"],
+                  "user.model.attribute": ["lastName"],
+                  "is.mandatory.in.ldap": ["false"],
+                  "read.only": ["true"],
+                  "always.read.value.from.ldap": ["false"]
+                }
+              },
+              {
+                "name": "group-ldap-mapper",
+                "providerId": "group-ldap-mapper",
+                "config": {
+                  "groups.dn": ["ou=groups,dc=dnp,dc=local"],
+                  "group.name.ldap.attribute": ["cn"],
+                  "group.object.classes": ["groupOfUniqueNames"],
+                  "preserve.group.inheritance": ["false"],
+                  "ignore.missing.groups": ["false"],
+                  "membership.ldap.attribute": ["member"],
+                  "membership.attribute.type": ["DN"],
+                  "membership.user.ldap.attribute": ["uid"],
+                  "groups.ldap.filter": [],
+                  "mode": ["READ_ONLY"],
+                  "user.roles.retrieve.strategy": ["LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"],
+                  "drop.non.existing.groups.during.sync": ["false"]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }

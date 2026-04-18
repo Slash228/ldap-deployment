@@ -1,3 +1,6 @@
+# Load environment variables from parent directory
+# Run: docker compose --env-file ../.env up -d
+
 services:
   lldap:
     image: lldap/lldap:stable
@@ -5,14 +8,13 @@ services:
     ports:
       - "3890:3890"
       - "17170:17170"
-    environment:
-      - LLDAP_LDAP_BASE_DN=${LLDAP_LDAP_BASE_DN}
-      - LLDAP_LDAP_USER_DN=${LLDAP_ADMIN_USERNAME}
-      - LLDAP_LDAP_USER_PASS=${LLDAP_ADMIN_PASSWORD}
-      - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
-      - TZ=Europe/Amsterdam
     volumes:
       - lldap-data:/data
+    environment:
+      - LLDAP_LDAP_BASE_DN=${LLDAP_LDAP_BASE_DN}
+      - LLDAP_LDAP_USER_PASS=${LLDAP_ADMIN_PASSWORD}
+      - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
+      - LLDAP_KEY_SEED=${LLDAP_KEY_SEED:-changeme_key_seed}
     networks:
       - ldap-net
     healthcheck:
@@ -44,12 +46,20 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:26.6.1
     container_name: keycloak
-    command: start-dev
+    command:
+      - start-dev
+      - --import-realm
     ports:
       - "8080:8080"
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
     environment:
-      KC_HTTP_ENABLED: "true"
-      KC_HEALTH_ENABLED: "true"
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
@@ -62,13 +72,33 @@ services:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      test: ["CMD-SHELL", "bash -c 'cat < /dev/null > /dev/tcp/127.0.0.1/8080'"]
       interval: 15s
       timeout: 5s
-      retries: 10
-      start_period: 60s
+      retries: 15
+      start_period: 90s
     restart: unless-stopped
 
+  # demo-app:
+  #   build:
+  #     context: ./demo-app
+  #     dockerfile: Dockerfile
+  #   container_name: demo-app
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     KEYCLOAK_URL: http://localhost:8080
+  #     KEYCLOAK_REALM: dnp-realm
+  #     KEYCLOAK_CLIENT_ID: demo-app
+  #     KEYCLOAK_CLIENT_SECRET: demo-app-secret
+  #     APP_URL: http://localhost:3000
+  #     SESSION_SECRET: ${APP_CLIENT_SECRET:-changeme_session_secret}
+  #   networks:
+  #     - ldap-net
+  #   depends_on:
+  #     keycloak:
+  #       condition: service_healthy
+  #   restart: unless-stopped
 
 volumes:
   lldap-data:

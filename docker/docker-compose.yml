@@ -3,8 +3,8 @@ services:
     image: lldap/lldap:latest
     container_name: lldap
     ports:
-      - "3890:3890"   # LDAP
-      - "17170:17170" # Web UI
+      - "3890:3890"
+      - "17170:17170"
     environment:
       - LLDAP_LDAP_BASE_DN=${LLDAP_LDAP_BASE_DN}
       - LLDAP_LDAP_USER_DN=${LLDAP_ADMIN_USERNAME}
@@ -15,10 +15,64 @@ services:
       - lldap-data:/data
     networks:
       - ldap-net
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:17170/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: keycloak-postgres
+    shm_size: 128mb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    networks:
+      - ldap-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: keycloak
+    command: start-dev
+    ports:
+      - "8080:8080"
+    environment:
+      KC_HTTP_ENABLED: "true"
+      KC_HEALTH_ENABLED: "true"
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    networks:
+      - ldap-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    restart: unless-stopped
+
 
 volumes:
   lldap-data:
+  postgres-data:
 
 networks:
   ldap-net:

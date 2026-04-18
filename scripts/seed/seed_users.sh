@@ -34,7 +34,7 @@ create_user() {
   echo "  Creating user: $uid"
   gql "mutation { createUser(user: { id: \\\"$uid\\\", email: \\\"$email\\\", displayName: \\\"$display\\\", firstName: \\\"$first\\\", lastName: \\\"$last\\\" }) { id } }" > /dev/null
   # Set password
-  gql "mutation { updateUser(user: { id: \\\"$uid\\\", password: \\\"$pass\\\" }) { ok } }" > /dev/null
+  gql "mutation { updatePassword(userId: \\\"$uid\\\", password: \\\"$pass\\\") { ok } }" > /dev/null
 }
 
 add_to_group() {

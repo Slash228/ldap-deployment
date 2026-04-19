@@ -2,8 +2,11 @@
 set -e
 
 LLDAP_URL="http://localhost:17170"
+LDAP_URL="ldap://localhost:3890"
 ADMIN_USER="admin"
 ADMIN_PASS="changeme_strong_password"
+BASE_DN="dc=dnp,dc=local"
+ADMIN_DN="uid=admin,ou=people,$BASE_DN"
 
 echo "==> Logging in to LLDAP..."
 TOKEN=$(curl -s "$LLDAP_URL/auth/simple/login" \
@@ -33,48 +36,53 @@ create_user() {
   local uid=$1 email=$2 display=$3 first=$4 last=$5 pass=$6
   echo "  Creating user: $uid"
   gql "mutation { createUser(user: { id: \\\"$uid\\\", email: \\\"$email\\\", displayName: \\\"$display\\\", firstName: \\\"$first\\\", lastName: \\\"$last\\\" }) { id } }" > /dev/null
-  # Set password
-  gql "mutation { updatePassword(userId: \\\"$uid\\\", password: \\\"$pass\\\") { ok } }" > /dev/null
+
+  echo "  Setting password for: $uid"
+  ldappasswd -H "$LDAP_URL" -x -D "$ADMIN_DN" -w "$ADMIN_PASS" -s "$pass" "uid=$uid,ou=people,$BASE_DN"
 }
 
 add_to_group() {
   local uid=$1 group=$2
   echo "  Adding $uid -> $group"
-  local gid=$(gql "{ group(name: \\\"$group\\\") { id } }" | grep -o '"id":[0-9]*' | head -1 | cut -d: -f2)
+
+  local gid=$(gql "{ groups { id displayName } }" \
+    | python3 -c "import sys,json; groups=json.load(sys.stdin)['data']['groups']; print(next((g['id'] for g in groups if g['displayName']=='$group'),''))")
+
   if [ -z "$gid" ]; then
     echo "  WARNING: group $group not found"
     return
   fi
+
   gql "mutation { addUserToGroup(userId: \\\"$uid\\\", groupId: $gid) { ok } }" > /dev/null
 }
 
-# ── Groups ──
 echo "==> Creating groups..."
 create_group "admins"
 create_group "developers"
 create_group "viewers"
 
-# ── Users ──
 echo "==> Creating users..."
-create_user "alice"   "alice@dnp.local"   "Alice Smith"   "Alice"   "Smith"   "alice123"
-create_user "bob"     "bob@dnp.local"     "Bob Jones"     "Bob"     "Jones"   "bob123"
-create_user "carol"   "carol@dnp.local"   "Carol Davis"   "Carol"   "Davis"   "carol123"
-create_user "dave"    "dave@dnp.local"    "Dave Wilson"   "Dave"    "Wilson"  "dave123"
-create_user "eve"     "eve@dnp.local"     "Eve Brown"     "Eve"     "Brown"   "eve123"
-create_user "mallory" "mallory@dnp.local" "Mallory Black" "Mallory" "Black"   "mallory123"
+create_user "alice"   "alice@dnp.local"   "Alice Smith"   "Alice"   "Smith"   "alice1234"
+create_user "bob"     "bob@dnp.local"     "Bob Jones"     "Bob"     "Jones"   "bob12345"
+create_user "carol"   "carol@dnp.local"   "Carol Davis"   "Carol"   "Davis"   "carol1234"
+create_user "dave"    "dave@dnp.local"    "Dave Wilson"   "Dave"    "Wilson"  "dave12345"
+create_user "eve"     "eve@dnp.local"     "Eve Brown"     "Eve"     "Brown"   "eve12345"
+create_user "mallory" "mallory@dnp.local" "Mallory Black" "Mallory" "Black"   "mallory1234"
 
-# ── Assign groups ──
 echo "==> Assigning groups..."
 add_to_group "alice" "admins"
 add_to_group "bob"   "developers"
 add_to_group "carol" "developers"
 add_to_group "dave"  "viewers"
 add_to_group "eve"   "viewers"
-# mallory — no group (intentional, for testing access denial)
 
 echo ""
 echo "==> Done! Created 3 groups and 6 users."
-echo "    admins:     alice"
-echo "    developers: bob, carol"
-echo "    viewers:    dave, eve"
-echo "    no group:   mallory"
+echo ""
+echo "    Credentials:"
+echo "    alice   / alice1234    (admins)"
+echo "    bob     / bob12345     (developers)"
+echo "    carol   / carol1234   (developers)"
+echo "    dave    / dave12345    (viewers)"
+echo "    eve     / eve12345     (viewers)"
+echo "    mallory / mallory1234  (no group)"

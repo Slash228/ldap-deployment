@@ -96,6 +96,26 @@ ldapsearch -H ldap://localhost:3890 -x \
   -b "ou=groups,dc=dnp,dc=local" "(objectClass=groupOfUniqueNames)" cn member
 ```
 
+## Validation
+
+See [docs/VALIDATION.md](docs/VALIDATION.md) for full details.
+
+```bash
+bash scripts/validation/smoke_test.sh          # quick check
+/opt/homebrew/bin/bash scripts/validation/run_validation.sh  # full suite
+```
+
+Results: **35/35 checks passed**
+
+| Scenario | Coverage |
+|----------|----------|
+| Login/logout for 6 users | ✅ |
+| Wrong password rejection | ✅ |
+| mallory → /unauthorized (no group) | ✅ |
+| /admin → admins only | ✅ |
+| Token revocation on logout | ✅ |
+| LDAP + Keycloak logs | ✅ |
+
 ## Project Structure
 
 ```text

@@ -15,6 +15,8 @@ fi
 
 KEYCLOAK_URL="http://localhost:8080"
 REALM="dnp-realm"
+KCADM="docker exec keycloak /opt/keycloak/bin/kcadm.sh"
+KCFG="--config /tmp/kcadm.config"
 
 echo "==> Waiting for Keycloak..."
 for i in $(seq 1 60); do
@@ -31,186 +33,214 @@ for i in $(seq 1 60); do
 done
 
 echo "==> Authenticating..."
-TOKEN_JSON=$(curl -s -X POST \
-  "$KEYCLOAK_URL/realms/master/protocol/openid-connect/token" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=password&client_id=admin-cli&username=$KC_ADMIN&password=$KC_PASS")
-
-TOKEN=$(echo "$TOKEN_JSON" | grep -o '"access_token":"[^"]*"' | cut -d'"' -f4)
-
-if [ -z "$TOKEN" ]; then
-    echo "ERROR: Invalid admin credentials"
-    exit 1
-fi
+$KCADM config credentials \
+    --server http://localhost:8080 \
+    --realm master \
+    --user "$KC_ADMIN" \
+    --password "$KC_PASS" \
+    $KCFG 2>/dev/null
 echo "  OK"
 
 echo "==> Configuring LDAP User Federation..."
-REALM_JSON=$(curl -s "$KEYCLOAK_URL/admin/realms/$REALM" -H "Authorization: Bearer $TOKEN")
-REALM_ID=$(echo "$REALM_JSON" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)
+REALM_ID=$($KCADM get realms/$REALM --fields id $KCFG 2>/dev/null \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
 
-EXISTING=$(curl -s "$KEYCLOAK_URL/admin/realms/$REALM/components?type=org.keycloak.storage.UserStorageProvider" \
-  -H "Authorization: Bearer $TOKEN")
-
-if echo "$EXISTING" | grep -q "lldap-provider"; then
-    echo "  LDAP provider exists, updating..."
-    PROVIDER_ID=$(echo "$EXISTING" | python3 -c "
+# Check if lldap-provider already exists
+PROVIDER_ID=$($KCADM get components \
+    --target-realm $REALM \
+    --query "type=org.keycloak.storage.UserStorageProvider" \
+    $KCFG 2>/dev/null \
+    | python3 -c "
 import sys,json
 data=json.load(sys.stdin)
 for c in data:
     if c.get('name')=='lldap-provider':
-        print(c['id'])
-        break
-")
-    curl -s -X PUT "$KEYCLOAK_URL/admin/realms/$REALM/components/$PROVIDER_ID" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H "Content-Type: application/json" \
-      -d "{
-        \"id\":\"$PROVIDER_ID\",
-        \"name\":\"lldap-provider\",
-        \"providerId\":\"ldap\",
-        \"providerType\":\"org.keycloak.storage.UserStorageProvider\",
-        \"parentId\":\"$REALM_ID\",
-        \"config\":{
-          \"vendor\":[\"other\"],
-          \"connectionUrl\":[\"ldap://lldap:3890\"],
-          \"bindDn\":[\"uid=admin,ou=people,dc=dnp,dc=local\"],
-          \"bindCredential\":[\"$LLDAP_PASS\"],
-          \"usersDn\":[\"ou=people,dc=dnp,dc=local\"],
-          \"usernameLDAPAttribute\":[\"uid\"],
-          \"rdnLDAPAttribute\":[\"uid\"],
-          \"uuidLDAPAttribute\":[\"uid\"],
-          \"userObjectClasses\":[\"inetOrgPerson\"],
-          \"editMode\":[\"READ_ONLY\"],
-          \"importEnabled\":[\"true\"]
-        }
-      }" > /dev/null
-else
+        print(c['id']); break
+" 2>/dev/null || true)
+
+if [ -z "$PROVIDER_ID" ]; then
     echo "  Creating LDAP provider..."
-    curl -s -X POST "$KEYCLOAK_URL/admin/realms/$REALM/components" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H "Content-Type: application/json" \
-      -d "{
-        \"name\":\"lldap-provider\",
-        \"providerId\":\"ldap\",
-        \"providerType\":\"org.keycloak.storage.UserStorageProvider\",
-        \"parentId\":\"$REALM_ID\",
-        \"config\":{
-          \"vendor\":[\"other\"],
-          \"connectionUrl\":[\"ldap://lldap:3890\"],
-          \"bindDn\":[\"uid=admin,ou=people,dc=dnp,dc=local\"],
-          \"bindCredential\":[\"$LLDAP_PASS\"],
-          \"usersDn\":[\"ou=people,dc=dnp,dc=local\"],
-          \"usernameLDAPAttribute\":[\"uid\"],
-          \"rdnLDAPAttribute\":[\"uid\"],
-          \"uuidLDAPAttribute\":[\"uid\"],
-          \"userObjectClasses\":[\"inetOrgPerson\"],
-          \"editMode\":[\"READ_ONLY\"],
-          \"importEnabled\":[\"true\"]
-        }
-      }" > /dev/null
-    EXISTING=$(curl -s "$KEYCLOAK_URL/admin/realms/$REALM/components?type=org.keycloak.storage.UserStorageProvider" \
-      -H "Authorization: Bearer $TOKEN")
-    PROVIDER_ID=$(echo "$EXISTING" | python3 -c "
+    $KCADM create components \
+        --target-realm $REALM \
+        $KCFG \
+        -s name=lldap-provider \
+        -s providerId=ldap \
+        -s providerType=org.keycloak.storage.UserStorageProvider \
+        -s parentId="$REALM_ID" \
+        -s 'config.vendor=["other"]' \
+        -s 'config.connectionUrl=["ldap://lldap:3890"]' \
+        -s "config.bindDn=[\"uid=admin,ou=people,dc=dnp,dc=local\"]" \
+        -s "config.bindCredential=[\"$LLDAP_PASS\"]" \
+        -s 'config.usersDn=["ou=people,dc=dnp,dc=local"]' \
+        -s 'config.usernameLDAPAttribute=["uid"]' \
+        -s 'config.rdnLDAPAttribute=["uid"]' \
+        -s 'config.uuidLDAPAttribute=["uid"]' \
+        -s 'config.userObjectClasses=["inetOrgPerson"]' \
+        -s 'config.editMode=["READ_ONLY"]' \
+        -s 'config.importEnabled=["true"]' \
+        -s 'config.syncRegistrations=["false"]' \
+        -s 'config.searchScope=["2"]' \
+        -s 'config.pagination=["true"]' \
+        2>/dev/null
+
+    PROVIDER_ID=$($KCADM get components \
+        --target-realm $REALM \
+        --query "type=org.keycloak.storage.UserStorageProvider" \
+        $KCFG 2>/dev/null \
+        | python3 -c "
 import sys,json
 data=json.load(sys.stdin)
 for c in data:
     if c.get('name')=='lldap-provider':
-        print(c['id'])
-        break
+        print(c['id']); break
 ")
+else
+    echo "  LDAP provider exists: ${PROVIDER_ID:0:8}..."
 fi
-echo "  Provider ID: $PROVIDER_ID"
+
+echo "  Provider ID: ${PROVIDER_ID:0:8}..."
 
 echo "==> Checking LDAP mappers..."
-MAPPERS=$(curl -s "$KEYCLOAK_URL/admin/realms/$REALM/components?parent=$PROVIDER_ID" \
-  -H "Authorization: Bearer $TOKEN")
+MAPPERS=$($KCADM get components \
+    --target-realm $REALM \
+    --query "parent=$PROVIDER_ID" \
+    $KCFG 2>/dev/null)
 
 create_mapper() {
-    local name=$1 pid=$2 ptype=$3 config=$4
-    if echo "$MAPPERS" | grep -q "\"name\":\"$name\""; then
+    local name=$1 pid=$2 ptype=$3
+    shift 3
+    if echo "$MAPPERS" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+names=[c.get('name') for c in data]
+exit(0 if '$name' in names else 1)
+" 2>/dev/null; then
         echo "  Mapper '$name' exists"
         return
     fi
     echo "  Creating mapper: $name"
-    curl -s -X POST "$KEYCLOAK_URL/admin/realms/$REALM/components" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H "Content-Type: application/json" \
-      -d "{
-        \"name\":\"$name\",
-        \"providerId\":\"$pid\",
-        \"providerType\":\"$ptype\",
-        \"parentId\":\"$PROVIDER_ID\",
-        \"config\":$config
-      }" > /dev/null
+    $KCADM create components \
+        --target-realm $REALM \
+        $KCFG \
+        -s "name=$name" \
+        -s "providerId=$pid" \
+        -s "providerType=$ptype" \
+        -s "parentId=$PROVIDER_ID" \
+        "$@" 2>/dev/null
 }
 
-create_mapper "username" "user-attribute-ldap-mapper" "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
-  '{"ldap.attribute":["uid"],"user.model.attribute":["username"],"is.mandatory.in.ldap":["true"],"read.only":["true"]}'
+create_mapper "username" "user-attribute-ldap-mapper" \
+    "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
+    -s 'config.ldap.attribute=["uid"]' \
+    -s 'config.user.model.attribute=["username"]' \
+    -s 'config.is.mandatory.in.ldap=["true"]' \
+    -s 'config.read.only=["true"]'
 
-create_mapper "email" "user-attribute-ldap-mapper" "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
-  '{"ldap.attribute":["mail"],"user.model.attribute":["email"],"is.mandatory.in.ldap":["false"],"read.only":["true"]}'
+create_mapper "email" "user-attribute-ldap-mapper" \
+    "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
+    -s 'config.ldap.attribute=["mail"]' \
+    -s 'config.user.model.attribute=["email"]' \
+    -s 'config.is.mandatory.in.ldap=["false"]' \
+    -s 'config.read.only=["true"]'
 
-create_mapper "first name" "user-attribute-ldap-mapper" "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
-  '{"ldap.attribute":["givenName"],"user.model.attribute":["firstName"],"is.mandatory.in.ldap":["false"],"read.only":["true"]}'
+create_mapper "first name" "user-attribute-ldap-mapper" \
+    "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
+    -s 'config.ldap.attribute=["givenName"]' \
+    -s 'config.user.model.attribute=["firstName"]' \
+    -s 'config.is.mandatory.in.ldap=["false"]' \
+    -s 'config.read.only=["true"]'
 
-create_mapper "last name" "user-attribute-ldap-mapper" "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
-  '{"ldap.attribute":["sn"],"user.model.attribute":["lastName"],"is.mandatory.in.ldap":["false"],"read.only":["true"]}'
+create_mapper "last name" "user-attribute-ldap-mapper" \
+    "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
+    -s 'config.ldap.attribute=["sn"]' \
+    -s 'config.user.model.attribute=["lastName"]' \
+    -s 'config.is.mandatory.in.ldap=["false"]' \
+    -s 'config.read.only=["true"]'
 
-create_mapper "group-ldap-mapper" "group-ldap-mapper" "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
-  "{
-    \"groups.dn\":[\"ou=groups,dc=dnp,dc=local\"],
-    \"group.name.ldap.attribute\":[\"cn\"],
-    \"group.object.classes\":[\"groupOfUniqueNames\"],
-    \"preserve.group.inheritance\":[\"false\"],
-    \"ignore.missing.groups\":[\"false\"],
-    \"membership.ldap.attribute\":[\"member\"],
-    \"membership.attribute.type\":[\"DN\"],
-    \"membership.user.ldap.attribute\":[\"uid\"],
-    \"mode\":[\"READ_ONLY\"],
-    \"user.roles.retrieve.strategy\":[\"LOAD_GROUPS_BY_MEMBER_ATTRIBUTE\"]
-  }"
+create_mapper "group-ldap-mapper" "group-ldap-mapper" \
+    "org.keycloak.storage.ldap.mappers.LDAPStorageMapper" \
+    -s 'config.groups.dn=["ou=groups,dc=dnp,dc=local"]' \
+    -s 'config.group.name.ldap.attribute=["cn"]' \
+    -s 'config.group.object.classes=["groupOfUniqueNames"]' \
+    -s 'config.preserve.group.inheritance=["false"]' \
+    -s 'config.ignore.missing.groups=["false"]' \
+    -s 'config.membership.ldap.attribute=["member"]' \
+    -s 'config.membership.attribute.type=["DN"]' \
+    -s 'config.membership.user.ldap.attribute=["uid"]' \
+    -s 'config.mode=["READ_ONLY"]' \
+    -s 'config.user.roles.retrieve.strategy=["LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"]'
 
-echo "==> Checking client protocol mapper..."
-CLIENTS=$(curl -s "$KEYCLOAK_URL/admin/realms/$REALM/clients?clientId=demo-app" \
-  -H "Authorization: Bearer $TOKEN")
-CLIENT_ID=$(echo "$CLIENTS" | python3 -c "
+echo "==> Checking groups claim mapper on demo-app client..."
+CLIENT_ID=$($KCADM get clients \
+    --target-realm $REALM \
+    --query "clientId=demo-app" \
+    $KCFG 2>/dev/null \
+    | python3 -c "
 import sys,json
 data=json.load(sys.stdin)
 print(data[0]['id']) if data else print('')
-")
+" 2>/dev/null || true)
 
 if [ -n "$CLIENT_ID" ]; then
-    PROTOCOL_MAPPERS=$(curl -s "$KEYCLOAK_URL/admin/realms/$REALM/clients/$CLIENT_ID/protocol-mappers/models" \
-      -H "Authorization: Bearer $TOKEN")
-    
-    if ! echo "$PROTOCOL_MAPPERS" | grep -q "group-membership-mapper"; then
-        echo "  Adding groups claim..."
-        curl -s -X POST "$KEYCLOAK_URL/admin/realms/$REALM/clients/$CLIENT_ID/protocol-mappers/models" \
-          -H "Authorization: Bearer $TOKEN" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "name":"group-membership-mapper",
-            "protocol":"openid-connect",
-            "protocolMapper":"oidc-group-membership-mapper",
-            "config":{
-              "full.path":"false",
-              "introspection.token.claim":"true",
-              "id.token.claim":"true",
-              "access.token.claim":"true",
-              "claim.name":"groups",
-              "userinfo.token.claim":"true"
-            }
-          }' > /dev/null
+    PMAPPERS=$($KCADM get clients/$CLIENT_ID/protocol-mappers/models \
+        --target-realm $REALM \
+        $KCFG 2>/dev/null)
+
+    if ! echo "$PMAPPERS" | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+names=[c.get('name') for c in data]
+exit(0 if 'group-membership-mapper' in names else 1)
+" 2>/dev/null; then
+        echo "  Adding groups claim mapper..."
+        $KCADM create clients/$CLIENT_ID/protocol-mappers/models \
+            --target-realm $REALM \
+            $KCFG \
+            -s name=group-membership-mapper \
+            -s protocol=openid-connect \
+            -s protocolMapper=oidc-group-membership-mapper \
+            -s 'config.full.path=false' \
+            -s 'config.introspection.token.claim=true' \
+            -s 'config.id.token.claim=true' \
+            -s 'config.access.token.claim=true' \
+            -s 'config.claim.name=groups' \
+            -s 'config.userinfo.token.claim=true' \
+            2>/dev/null
         echo "  Added"
     else
         echo "  Groups claim mapper exists"
     fi
 fi
 
-echo "==> Syncing users..."
-SYNC_RESULT=$(curl -s -X POST "$KEYCLOAK_URL/admin/realms/$REALM/user-storage/$PROVIDER_ID/sync?action=triggerFullSync" \
-  -H "Authorization: Bearer $TOKEN")
+echo "==> Syncing users from LLDAP..."
+SYNC_RESULT=$($KCADM create \
+    "user-storage/$PROVIDER_ID/sync?action=triggerFullSync" \
+    --target-realm $REALM \
+    $KCFG 2>/dev/null || true)
 echo "  Result: $SYNC_RESULT"
+
+echo "==> Syncing groups from LLDAP..."
+MAPPER_ID=$($KCADM get components \
+    --target-realm $REALM \
+    --query "parent=$PROVIDER_ID" \
+    $KCFG 2>/dev/null \
+    | python3 -c "
+import sys,json
+data=json.load(sys.stdin)
+for m in data:
+    if m.get('name')=='group-ldap-mapper':
+        print(m['id']); break
+" 2>/dev/null || true)
+
+if [ -n "$MAPPER_ID" ]; then
+    $KCADM create \
+        "user-storage/$PROVIDER_ID/mappers/$MAPPER_ID/sync?direction=fedToKeycloak" \
+        --target-realm $REALM \
+        $KCFG 2>/dev/null || true
+    echo "  Groups synced"
+else
+    echo "  WARNING: group mapper not found"
+fi
 
 echo ""
 echo "========================================="

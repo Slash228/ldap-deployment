@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 1rem;">User Profile</h2>
+
+<div class="card">
+    <h3>OIDC User Info</h3>
+    <div class="grid">
+        <div class="field">
+            <label>Subject</label>
+            <span class="mono">{{ user.sub or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Username</label>
+            <span>{{ user.preferred_username or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Name</label>
+            <span>{{ user.name or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <span>{{ user.email or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>First Name</label>
+            <span>{{ user.given_name or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Last Name</label>
+            <span>{{ user.family_name or '—' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>LDAP Groups</h3>
+    <p class="subtle" style="margin-bottom: 0.5rem;">
+        Groups are sourced from LLDAP via Keycloak User Federation and exposed in the <code>groups</code> token claim.
+    </p>
+    {% if groups %}
+        {% for g in groups %}
+            <span class="badge badge-{{ g }}">{{ g }}</span>
+        {% endfor %}
+    {% else %}
+        <p style="color: #c62828; font-size: 0.9rem;">No groups assigned.</p>
+        <p class="subtle">Without a recognized LDAP group, only this profile page is accessible.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Raw Token Claims</h3>
+    <pre class="token-debug">{{ user | tojson(indent=2) }}</pre>
+</div>
+{% endblock %}

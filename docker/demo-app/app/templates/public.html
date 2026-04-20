@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Public{% endblock %}
+
+{% block content %}
+<div class="card section-label section-label-green">
+    <h2>Public Page</h2>
+    <p class="subtle">Accessible to all authenticated users with a recognized LDAP group.</p>
+</div>
+
+<div class="card">
+    <h3>Your Groups</h3>
+    {% if groups %}
+        {% for g in groups %}
+            <span class="badge badge-{{ g }}">{{ g }}</span>
+        {% endfor %}
+    {% else %}
+        <p class="subtle">No groups assigned</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Available Pages</h3>
+    <div class="access-row {% if is_developer %}access-granted{% else %}access-denied{% endif %}">
+        <div class="indicator {% if is_developer %}indicator-yes{% else %}indicator-no{% endif %}"></div>
+        <div>
+            <a href="{{ url_for('main.dashboard') }}"><strong>Dashboard</strong></a><br>
+            <small class="subtle">developers, admins</small>
+        </div>
+    </div>
+    <div class="access-row {% if is_admin %}access-granted{% else %}access-denied{% endif %}">
+        <div class="indicator {% if is_admin %}indicator-yes{% else %}indicator-no{% endif %}"></div>
+        <div>
+            <a href="{{ url_for('main.admin') }}"><strong>Admin Panel</strong></a><br>
+            <small class="subtle">admins only</small>
+        </div>
+    </div>
+</div>
+{% endblock %}

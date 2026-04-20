@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Access Denied{% endblock %}
+
+{% block content %}
+<div class="card login-box">
+    <div style="width: 48px; height: 48px; border-radius: 50%; background: #fdecea; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+        <span style="color: #c62828; font-size: 1.2rem; font-weight: bold;">!</span>
+    </div>
+    <h2 style="margin-bottom: 0.5rem;">Access Denied</h2>
+    <p class="subtle" style="margin-bottom: 1.25rem;">
+        You are authenticated but do not have the required group membership to view this page.
+    </p>
+    <div style="background: #f8f8f8; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1.25rem; text-align: left; font-size: 0.85rem;">
+        <span class="subtle">Your groups:</span>
+        <code>{{ groups | join(', ') or 'none' }}</code>
+    </div>
+    <div style="display: flex; gap: 0.5rem; justify-content: center;">
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary">Home</a>
+        <a href="{{ url_for('main.profile') }}" class="btn btn-primary">Profile</a>
+    </div>
+</div>
+{% endblock %}

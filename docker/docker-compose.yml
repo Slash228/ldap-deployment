@@ -1,6 +1,3 @@
-# Load environment variables from parent directory
-# Run: docker compose --env-file ../.env up -d
-
 services:
   lldap:
     image: lldap/lldap:stable
@@ -14,14 +11,15 @@ services:
       - LLDAP_LDAP_BASE_DN=${LLDAP_LDAP_BASE_DN}
       - LLDAP_LDAP_USER_PASS=${LLDAP_ADMIN_PASSWORD}
       - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
-      - LLDAP_KEY_SEED=${LLDAP_KEY_SEED:-changeme_key_seed}
+      - LLDAP_KEY_SEED=${LLDAP_KEY_SEED}
     networks:
       - ldap-net
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:17170/health"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:17170/health || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 30s
     restart: unless-stopped
 
   postgres:
@@ -79,26 +77,26 @@ services:
       start_period: 90s
     restart: unless-stopped
 
-  # demo-app:
-  #   build:
-  #     context: ./demo-app
-  #     dockerfile: Dockerfile
-  #   container_name: demo-app
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     KEYCLOAK_URL: http://localhost:8080
-  #     KEYCLOAK_REALM: dnp-realm
-  #     KEYCLOAK_CLIENT_ID: demo-app
-  #     KEYCLOAK_CLIENT_SECRET: demo-app-secret
-  #     APP_URL: http://localhost:3000
-  #     SESSION_SECRET: ${APP_CLIENT_SECRET:-changeme_session_secret}
-  #   networks:
-  #     - ldap-net
-  #   depends_on:
-  #     keycloak:
-  #       condition: service_healthy
-  #   restart: unless-stopped
+  demo-app:
+    build:
+      context: ./demo-app
+      dockerfile: Dockerfile
+    container_name: demo-app
+    ports:
+      - "3000:3000"
+    environment:
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: dnp-realm
+      KEYCLOAK_CLIENT_ID: demo-app
+      KEYCLOAK_CLIENT_SECRET: demo-app-secret
+      APP_URL: http://localhost:3000
+      SESSION_SECRET: ${APP_CLIENT_SECRET}
+    networks:
+      - ldap-net
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    restart: unless-stopped
 
 volumes:
   lldap-data:

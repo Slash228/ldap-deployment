@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="card section-label section-label-red">
+    <h2>Admin Panel</h2>
+    <p class="subtle">Restricted to members of the <strong>admins</strong> group.</p>
+</div>
+
+<div class="card">
+    <h3>System Overview</h3>
+    <div class="grid" style="margin-top: 0.5rem;">
+        <div class="field">
+            <label>Authenticated User</label>
+            <span>{{ user_name }}</span>
+        </div>
+        <div class="field">
+            <label>User Groups</label>
+            <span>{% for g in groups %}<span class="badge badge-{{ g }}">{{ g }}</span> {% endfor %}</span>
+        </div>
+        <div class="field">
+            <label>User ID</label>
+            <span class="mono">{{ user.sub or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <span>{{ user.email or '—' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Quick Links</h3>
+    <div style="margin-top: 0.5rem; font-size: 0.9rem; line-height: 2;">
+        <a href="http://localhost:17170" target="_blank">LLDAP Admin</a> — manage users and groups<br>
+        <a href="http://localhost:8080/admin" target="_blank">Keycloak Console</a> — realm and federation settings
+    </div>
+</div>
+{% endblock %}

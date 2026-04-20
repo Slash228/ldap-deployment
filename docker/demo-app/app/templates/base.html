@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Demo App{% endblock %} — LDAP Auth Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f6f8;
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #1c2536;
+            color: #fff;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 52px;
+            font-size: 0.9rem;
+        }
+        .navbar a { color: #cfd8e3; text-decoration: none; transition: color 0.15s; }
+        .navbar a:hover { color: #fff; }
+        .nav-brand { font-weight: 600; font-size: 1rem; color: #fff; }
+        .nav-links { display: flex; gap: 1.25rem; align-items: center; }
+        .nav-user { display: flex; align-items: center; gap: 0.75rem; }
+        .badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .badge-admins { background: #f8d7da; color: #842029; }
+        .badge-developers { background: #cfe2ff; color: #084298; }
+        .badge-viewers { background: #d1e7dd; color: #0f5132; }
+        .container { max-width: 860px; margin: 0 auto; padding: 1.5rem; }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            border: 1px solid #e2e5ea;
+            margin-bottom: 0.75rem;
+        }
+        .card h2 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .card h3 { font-size: 0.95rem; margin-bottom: 0.75rem; color: #333; }
+        .btn {
+            padding: 0.4rem 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.15s;
+        }
+        .btn-primary { background: #2c3e6b; color: #fff; }
+        .btn-primary:hover { background: #3a5291; }
+        .btn-outline { background: transparent; color: #c0392b; border: 1px solid #e0b4b4; }
+        .btn-outline:hover { background: #c0392b; color: #fff; }
+        .login-box {
+            max-width: 380px;
+            margin: 5rem auto;
+            text-align: center;
+        }
+        .login-box h1 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+        .login-box p { color: #666; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
+        .field { display: flex; flex-direction: column; gap: 0.15rem; }
+        .field label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+        .field span { font-weight: 500; font-size: 0.9rem; }
+        .field .mono { font-family: 'SF Mono', Consolas, monospace; font-size: 0.8rem; color: #555; }
+        .access-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; border-radius: 6px; margin-bottom: 0.4rem; font-size: 0.9rem; }
+        .access-granted { background: #edf7ed; }
+        .access-denied { background: #f8f8f8; }
+        .indicator { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .indicator-yes { background: #2e7d32; }
+        .indicator-no { background: #ccc; }
+        .token-debug { background: #1c2536; color: #8fbcbb; padding: 1rem; border-radius: 6px; font-size: 0.78rem; overflow-x: auto; font-family: 'SF Mono', Consolas, monospace; }
+        .section-label { border-left: 3px solid; padding-left: 0.75rem; }
+        .section-label-red { border-color: #c62828; }
+        .section-label-green { border-color: #2e7d32; }
+        .section-label-blue { border-color: #1565c0; }
+        .subtle { color: #777; font-size: 0.85rem; }
+        a { color: #2c3e6b; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="{{ url_for('main.index') }}" class="nav-brand">LDAP Auth Demo</a>
+            <a href="{{ url_for('main.public') }}">Public</a>
+            {% if user %}
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            {% if is_admin %}
+            <a href="{{ url_for('main.admin') }}">Admin</a>
+            {% endif %}
+            <a href="{{ url_for('main.profile') }}">Profile</a>
+            {% endif %}
+        </div>
+        <div class="nav-user">
+            {% if user %}
+                <span style="color: #cfd8e3;">{{ user_name }}</span>
+                {% for g in groups %}
+                <span class="badge badge-{{ g }}">{{ g }}</span>
+                {% endfor %}
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-outline">Sign Out</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Sign In</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

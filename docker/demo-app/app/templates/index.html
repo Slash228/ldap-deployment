@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user %}
+    <div style="padding: 0.75rem 1rem; background: #edf7ed; color: #2e7d32; border-radius: 6px; margin-bottom: 1rem; font-size: 0.9rem;">
+        Signed in as <strong>{{ user_name }}</strong>.
+        <a href="{{ url_for('main.dashboard') }}" style="color: #2e7d32;">Go to Dashboard</a>
+    </div>
+{% endif %}
+
+<div class="card login-box" style="margin-top: 2rem;">
+    <h1>LDAP Auth Demo</h1>
+    <p>Authentication via OIDC with group-based access control</p>
+    <div style="text-align: left; margin-bottom: 1.5rem; font-size: 0.85rem; color: #555;">
+        <div style="padding: 0.35rem 0;">Keycloak OIDC authentication</div>
+        <div style="padding: 0.35rem 0;">LLDAP user federation</div>
+        <div style="padding: 0.35rem 0;">LDAP group-based RBAC</div>
+    </div>
+    {% if not user %}
+    <a href="{{ url_for('auth.login') }}" class="btn btn-primary" style="padding: 0.6rem 2rem;">
+        Sign in with Keycloak
+    </a>
+    {% endif %}
+    <div style="margin-top: 1.5rem; color: #aaa; font-size: 0.78rem;">
+        LLDAP &middot; PostgreSQL 17 &middot; Keycloak 26.6 &middot; Flask
+    </div>
+</div>
+{% endblock %}

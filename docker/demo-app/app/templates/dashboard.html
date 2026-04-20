@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 1rem;">Dashboard</h2>
+
+<div class="card">
+    <h3>User Profile</h3>
+    <div class="grid">
+        <div class="field">
+            <label>Username</label>
+            <span>{{ user.preferred_username or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <span>{{ user.email or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Full Name</label>
+            <span>{{ user.name or '—' }}</span>
+        </div>
+        <div class="field">
+            <label>Subject ID</label>
+            <span class="mono">{{ user.sub or '—' }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>LDAP Groups</h3>
+    {% if groups %}
+        {% for g in groups %}
+            <span class="badge badge-{{ g }}">{{ g }}</span>
+        {% endfor %}
+    {% else %}
+        <p class="subtle">No groups assigned</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Access Matrix</h3>
+
+    <div class="access-row {% if is_admin %}access-granted{% else %}access-denied{% endif %}">
+        <div class="indicator {% if is_admin %}indicator-yes{% else %}indicator-no{% endif %}"></div>
+        <div>
+            <strong>Admin Panel</strong><br>
+            <small class="subtle">Requires: admins</small>
+        </div>
+    </div>
+
+    <div class="access-row {% if is_developer %}access-granted{% else %}access-denied{% endif %}">
+        <div class="indicator {% if is_developer %}indicator-yes{% else %}indicator-no{% endif %}"></div>
+        <div>
+            <strong>Developer Tools</strong><br>
+            <small class="subtle">Requires: developers</small>
+        </div>
+    </div>
+
+    <div class="access-row {% if is_viewer %}access-granted{% else %}access-denied{% endif %}">
+        <div class="indicator {% if is_viewer %}indicator-yes{% else %}indicator-no{% endif %}"></div>
+        <div>
+            <strong>Viewer Access</strong><br>
+            <small class="subtle">Requires: viewers</small>
+        </div>
+    </div>
+</div>
+
+{% if is_developer %}
+<div class="card section-label section-label-blue">
+    <h3>Developer Tools</h3>
+    <p class="subtle">Visible because you are a member of the <strong>developers</strong> group.</p>
+</div>
+{% endif %}
+
+<div class="card">
+    <h3>Token Claims</h3>
+    <pre class="token-debug">{{ user | tojson(indent=2) }}</pre>
+</div>
+{% endblock %}

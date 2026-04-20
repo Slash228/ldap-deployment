@@ -54,4 +54,3 @@ bash scripts/validation/smoke_test.sh
 - macOS ships with bash 3.2 — use `brew install bash` and run with `/opt/homebrew/bin/bash`
 - Keycloak 26 requires HTTPS for master realm from outside — `setup_keycloak.sh` uses `kcadm.sh` via `docker exec`
 - Client secret is `demo-app-secret` (hardcoded in `docker/keycloak/realm-export.json`)
-EOF

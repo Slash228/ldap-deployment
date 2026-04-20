@@ -1,0 +1,330 @@
+[ {
+  "id" : "9854080d-b613-4081-b7d9-378e6380749b",
+  "time" : 1776710803314,
+  "type" : "REVOKE_GRANT",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "d2530e30-ae25-4c9e-bbca-9829b462d78d",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "token_id" : "onrtro:1d676df6-49bb-f572-ce9c-d8d010d5da80",
+    "client_auth_method" : "client-secret"
+  }
+}, {
+  "id" : "169a200a-17a3-4b38-b386-4f02ae8d454a",
+  "time" : 1776710802681,
+  "type" : "REVOKE_GRANT",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "9a70de43-d092-4d58-af7e-5a1520683cba",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "token_id" : "onrtro:bf1e1481-30bf-772a-8cf0-6192d57a83ab",
+    "client_auth_method" : "client-secret"
+  }
+}, {
+  "id" : "1005bb93-dbf9-4ce2-8019-6a95f77a2bee",
+  "time" : 1776710802046,
+  "type" : "REVOKE_GRANT",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "51ce971a-0f36-4ac9-9361-798f5730051b",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "token_id" : "onrtro:598126e6-5943-b108-71f7-440ee39690e2",
+    "client_auth_method" : "client-secret"
+  }
+}, {
+  "id" : "1843ef52-92f5-4811-b184-ad6b48cea87e",
+  "time" : 1776710801413,
+  "type" : "REVOKE_GRANT",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "fbb92224-b68f-4020-b6f5-27ec669ceb65",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "token_id" : "onrtro:d81984aa-13f5-d8ae-ab4a-ee98099b9d5d",
+    "client_auth_method" : "client-secret"
+  }
+}, {
+  "id" : "5d09e63e-f1c1-4a1b-ac90-b783fab6d447",
+  "time" : 1776710800778,
+  "type" : "REVOKE_GRANT",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "b5e78c64-68ec-404f-8879-d52d7cca4d92",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "token_id" : "onrtro:a94a00da-5395-7d9f-4a42-4a3c8f0addf4",
+    "client_auth_method" : "client-secret"
+  }
+}, {
+  "id" : "4cfc01ad-7165-48b8-b52e-94d8e81f4016",
+  "time" : 1776710800161,
+  "type" : "REVOKE_GRANT",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "ac3ccbfc-0de5-4734-b6a1-cbeb0a8e65ee",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "token_id" : "onrtro:f0d1fc61-bf0e-67e6-4bf1-b6b0877df41d",
+    "client_auth_method" : "client-secret"
+  }
+}, {
+  "id" : "7ababa99-cc86-47c6-86d9-ed56240f46e2",
+  "time" : 1776710799760,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "d2530e30-ae25-4c9e-bbca-9829b462d78d",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "mallory"
+  }
+}, {
+  "id" : "c22e6b0a-87f5-493b-879b-c7ac24312afd",
+  "time" : 1776710799652,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "9a70de43-d092-4d58-af7e-5a1520683cba",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "eve"
+  }
+}, {
+  "id" : "5791026d-f532-4bb9-8536-4af596cb3b0f",
+  "time" : 1776710799544,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "51ce971a-0f36-4ac9-9361-798f5730051b",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "dave"
+  }
+}, {
+  "id" : "c45be61c-d029-413f-8d9f-44f29f8790a4",
+  "time" : 1776710799427,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "fbb92224-b68f-4020-b6f5-27ec669ceb65",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "carol"
+  }
+}, {
+  "id" : "dbe7e4b7-cbaa-43f3-8001-e329e58efd25",
+  "time" : 1776710799315,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "b5e78c64-68ec-404f-8879-d52d7cca4d92",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "bob"
+  }
+}, {
+  "id" : "af684734-629b-41de-8b5e-e2433d3a5688",
+  "time" : 1776710799205,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "ac3ccbfc-0de5-4734-b6a1-cbeb0a8e65ee",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "alice"
+  }
+}, {
+  "id" : "5fc87c1f-314d-4315-861b-2d6846ab7253",
+  "time" : 1776710798871,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "d2530e30-ae25-4c9e-bbca-9829b462d78d",
+  "sessionId" : "ncoYAcqBif-oXTWfA4IJd27e",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:1d676df6-49bb-f572-ce9c-d8d010d5da80",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "3c4c10ee-d686-0ab8-e9c4-709426e48519",
+    "client_auth_method" : "client-secret",
+    "username" : "mallory"
+  }
+}, {
+  "id" : "1439b2a9-eded-4822-9834-b6e26bc544ba",
+  "time" : 1776710798691,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "9a70de43-d092-4d58-af7e-5a1520683cba",
+  "sessionId" : "l1dEpdHaoa75J7OBARtoH9sa",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:bf1e1481-30bf-772a-8cf0-6192d57a83ab",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "984734e7-0449-3332-e504-c126b31fbb2f",
+    "client_auth_method" : "client-secret",
+    "username" : "eve"
+  }
+}, {
+  "id" : "66a4eb34-f592-4c37-98a0-3b34bf70df87",
+  "time" : 1776710798413,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "51ce971a-0f36-4ac9-9361-798f5730051b",
+  "sessionId" : "zPGB0LDcBxw1Ll6UaMKsjGNi",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:598126e6-5943-b108-71f7-440ee39690e2",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "34561412-f7c7-48a2-385e-012cf5790298",
+    "client_auth_method" : "client-secret",
+    "username" : "dave"
+  }
+}, {
+  "id" : "4528b263-28d9-45d4-9278-7a3324486906",
+  "time" : 1776710798133,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "fbb92224-b68f-4020-b6f5-27ec669ceb65",
+  "sessionId" : "4po0OzTtVpcQv9jiQ6vy6lka",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:d81984aa-13f5-d8ae-ab4a-ee98099b9d5d",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "079b311d-0e09-4d70-8537-cb7fb303cadd",
+    "client_auth_method" : "client-secret",
+    "username" : "carol"
+  }
+}, {
+  "id" : "20f4300a-cd50-4ec0-8a87-24f35f340ebe",
+  "time" : 1776710797868,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "b5e78c64-68ec-404f-8879-d52d7cca4d92",
+  "sessionId" : "2JF7lG-B983-JT9YW52o4vvQ",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:a94a00da-5395-7d9f-4a42-4a3c8f0addf4",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "da4eea34-a3ba-6450-e03d-a936410b747b",
+    "client_auth_method" : "client-secret",
+    "username" : "bob"
+  }
+}, {
+  "id" : "fff5df1b-621f-4392-a099-ce45208a5279",
+  "time" : 1776710797551,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "ac3ccbfc-0de5-4734-b6a1-cbeb0a8e65ee",
+  "sessionId" : "AN7cvJCjJuedifFCEvcRaRI6",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:f0d1fc61-bf0e-67e6-4bf1-b6b0877df41d",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "1ffc78ef-1246-2b68-22f7-786d71967cff",
+    "client_auth_method" : "client-secret",
+    "username" : "alice"
+  }
+}, {
+  "id" : "6e2d66ca-bceb-4728-b64c-edd1d304d12d",
+  "time" : 1776710682881,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "d2530e30-ae25-4c9e-bbca-9829b462d78d",
+  "sessionId" : "1HMRRZIgA1bZULyjXAQMoqIk",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:c471ab66-86f5-36d2-1c36-64cbf1a3cedf",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "a3512c9e-174e-636d-fe62-62f2e3740fd1",
+    "client_auth_method" : "client-secret",
+    "username" : "mallory"
+  }
+}, {
+  "id" : "f61b8e83-0a74-44d9-8bd2-499d78a48541",
+  "time" : 1776710682714,
+  "type" : "LOGIN_ERROR",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "ac3ccbfc-0de5-4734-b6a1-cbeb0a8e65ee",
+  "ipAddress" : "151.101.128.223",
+  "error" : "invalid_user_credentials",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "grant_type" : "password",
+    "client_auth_method" : "client-secret",
+    "username" : "alice"
+  }
+}, {
+  "id" : "85599757-30fc-42eb-9386-1315b4e37247",
+  "time" : 1776710682569,
+  "type" : "LOGIN",
+  "realmId" : "dnp-realm",
+  "clientId" : "demo-app",
+  "userId" : "ac3ccbfc-0de5-4734-b6a1-cbeb0a8e65ee",
+  "sessionId" : "OdZHrcAeLpzBY179OL6tM-k8",
+  "ipAddress" : "151.101.128.223",
+  "details" : {
+    "auth_method" : "openid-connect",
+    "token_id" : "onrtro:8c60cc14-3247-cdd1-0938-1fba5508fe5e",
+    "grant_type" : "password",
+    "refresh_token_type" : "Refresh",
+    "scope" : "openid profile email",
+    "refresh_token_id" : "77dc795f-10ac-d51b-ef68-76dcda38c33a",
+    "client_auth_method" : "client-secret",
+    "username" : "alice"
+  }
+} ]

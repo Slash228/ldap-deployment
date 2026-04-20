@@ -1,0 +1,187 @@
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  PREFLIGHT — Service availability[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[0;32m[21:46:37 PASS][0m  LLDAP health    http://localhost:17170/health
+[0;32m[21:46:37 PASS][0m  Keycloak realm  http://localhost:8080/realms/dnp-realm
+[0;32m[21:46:37 PASS][0m  Demo app        http://localhost:3000
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 1 — Login (token issuance) for all users[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+
+  User       Password       Expected groups    Result
+  ─────────  ─────────────  ─────────────────  ──────
+[0;32m[21:46:37 PASS][0m  alice: token issued successfully
+[0;36m[21:46:37 INFO][0m  alice: JWT payload:
+    {
+      "preferred_username": "alice",
+      "groups": [
+        "admins"
+      ],
+      "exp": 1776711097,
+      "iss": "http://localhost:8080/realms/dnp-realm",
+      "aud": "account"
+    }
+
+[0;32m[21:46:37 PASS][0m  bob: token issued successfully
+[0;36m[21:46:37 INFO][0m  bob: JWT payload:
+    {
+      "preferred_username": "bob",
+      "groups": [
+        "developers"
+      ],
+      "exp": 1776711097,
+      "iss": "http://localhost:8080/realms/dnp-realm",
+      "aud": "account"
+    }
+
+[0;32m[21:46:38 PASS][0m  carol: token issued successfully
+[0;36m[21:46:38 INFO][0m  carol: JWT payload:
+    {
+      "preferred_username": "carol",
+      "groups": [
+        "developers"
+      ],
+      "exp": 1776711098,
+      "iss": "http://localhost:8080/realms/dnp-realm",
+      "aud": "account"
+    }
+
+[0;32m[21:46:38 PASS][0m  dave: token issued successfully
+[0;36m[21:46:38 INFO][0m  dave: JWT payload:
+    {
+      "preferred_username": "dave",
+      "groups": [
+        "viewers"
+      ],
+      "exp": 1776711098,
+      "iss": "http://localhost:8080/realms/dnp-realm",
+      "aud": "account"
+    }
+
+[0;32m[21:46:38 PASS][0m  eve: token issued successfully
+[0;36m[21:46:38 INFO][0m  eve: JWT payload:
+    {
+      "preferred_username": "eve",
+      "groups": [
+        "viewers"
+      ],
+      "exp": 1776711098,
+      "iss": "http://localhost:8080/realms/dnp-realm",
+      "aud": "account"
+    }
+
+[0;32m[21:46:38 PASS][0m  mallory: token issued successfully
+[0;36m[21:46:38 INFO][0m  mallory: JWT payload:
+    {
+      "preferred_username": "mallory",
+      "exp": 1776711098,
+      "iss": "http://localhost:8080/realms/dnp-realm",
+      "aud": "account"
+    }
+
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 2 — groups claim validation (LDAP → Keycloak → JWT)[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[0;32m[21:46:39 PASS][0m  alice: groups=[admins] ✓
+[0;32m[21:46:39 PASS][0m  bob: groups=[developers] ✓
+[0;32m[21:46:39 PASS][0m  carol: groups=[developers] ✓
+[0;32m[21:46:39 PASS][0m  dave: groups=[viewers] ✓
+[0;32m[21:46:39 PASS][0m  eve: groups=[viewers] ✓
+[0;32m[21:46:39 PASS][0m  mallory: groups=[none] ✓
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 3 — Wrong password rejected by Keycloak[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[0;32m[21:46:39 PASS][0m  alice: wrong password → no token issued (empty response)
+[0;32m[21:46:39 PASS][0m  bob: wrong password → no token issued (empty response)
+[0;32m[21:46:39 PASS][0m  carol: wrong password → no token issued (empty response)
+[0;32m[21:46:39 PASS][0m  dave: wrong password → no token issued (empty response)
+[0;32m[21:46:39 PASS][0m  eve: wrong password → no token issued (empty response)
+[0;32m[21:46:39 PASS][0m  mallory: wrong password → no token issued (empty response)
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 4 — mallory: authorized token, but no group → /unauthorized[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[0;36m[21:46:39 INFO][0m  mallory token status:
+[0;32m[21:46:39 PASS][0m  mallory: token valid, groups=[] — Flask will redirect to /unauthorized on all protected routes
+
+  Simulated Flask RBAC check:
+    user_groups = []
+    @group_required('admins') → any(g in [] for g in ['admins']) = False → [0;31mREDIRECT /unauthorized[0m
+    @group_required('developers') → any(g in [] for g in ['developers']) = False → [0;31mREDIRECT /unauthorized[0m
+    @group_required('viewers') → any(g in [] for g in ['viewers']) = False → [0;31mREDIRECT /unauthorized[0m
+
+[1;33m[21:46:39 WARN][0m  mallory: /unauthorized returned HTTP 403
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 5 — Admin access: alice allowed, all others denied[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[0;32m[21:46:39 PASS][0m  alice: in 'admins' → /admin route GRANTED
+[0;32m[21:46:39 PASS][0m  bob: NOT in 'admins' → /admin route DENIED (groups=[developers])
+[0;32m[21:46:40 PASS][0m  carol: NOT in 'admins' → /admin route DENIED (groups=[developers])
+[0;32m[21:46:40 PASS][0m  dave: NOT in 'admins' → /admin route DENIED (groups=[viewers])
+[0;32m[21:46:40 PASS][0m  eve: NOT in 'admins' → /admin route DENIED (groups=[viewers])
+[0;32m[21:46:40 PASS][0m  mallory: NOT in 'admins' → /admin route DENIED (groups=[none])
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 6 — Logout: token revocation via Keycloak[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+  alice: introspect before logout → active=true
+  [0;36m→[0m alice: revoke sent
+[0;32m[21:46:40 PASS][0m  alice: logout confirmed — token introspect active=false
+  bob: introspect before logout → active=true
+  [0;36m→[0m bob: revoke sent
+[0;32m[21:46:41 PASS][0m  bob: logout confirmed — token introspect active=false
+  carol: introspect before logout → active=true
+  [0;36m→[0m carol: revoke sent
+[0;32m[21:46:41 PASS][0m  carol: logout confirmed — token introspect active=false
+  dave: introspect before logout → active=true
+  [0;36m→[0m dave: revoke sent
+[0;32m[21:46:42 PASS][0m  dave: logout confirmed — token introspect active=false
+  eve: introspect before logout → active=true
+  [0;36m→[0m eve: revoke sent
+[0;32m[21:46:43 PASS][0m  eve: logout confirmed — token introspect active=false
+  mallory: introspect before logout → active=true
+  [0;36m→[0m mallory: revoke sent
+[0;32m[21:46:43 PASS][0m  mallory: logout confirmed — token introspect active=false
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  SCENARIO 7 — Collect LDAP & Keycloak logs[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[0;36m[→][0m    Collecting LLDAP logs...
+[0;32m[OK][0m   LLDAP raw log → logs/lldap_raw.log  (container: lldap)
+[0;32m[OK][0m   LLDAP parsed log → logs/lldap_parsed.log
+[0;36m[→][0m    Collecting Keycloak container logs...
+[0;32m[OK][0m   Keycloak raw log → logs/keycloak_raw.log  (container: keycloak)
+[0;36m[→][0m    Fetching Keycloak events via Admin API...
+[1;33m[WARN][0m Could not obtain Keycloak admin token — check KC admin credentials
+[1;33m[WARN][0m   Ensure KEYCLOAK_ADMIN / KEYCLOAK_ADMIN_PASSWORD are set in .env
+
+[0;32m[OK][0m   Log collection complete. Files:
+    examples                                 96B
+    keycloak_raw.log                         10K
+    lldap_parsed.log                         2.8K
+    lldap_raw.log                            32K
+    validation_20260420_214540.log           483B
+    validation_20260420_214557.log           483B
+    validation_20260420_214600.log           409B
+    validation_20260420_214637.log           9.1K
+[0;32m[21:46:44 PASS][0m  Logs collected — see logs/
+
+[1m[1;33m══════════════════════════════════════════════════════[0m
+[1m[1;33m  VALIDATION SUMMARY[0m
+[1m[1;33m══════════════════════════════════════════════════════[0m
+
+  ┌──────────────────────────────────────┐
+  │  Tests run  : 35                       │
+  │  Passed     : 35                       │
+  │  Failed     : 0                        │
+  │  Warnings   : 1                        │
+  └──────────────────────────────────────┘
+
+  Log file: logs/validation_20260420_214637.log
+
+[0;32m[1m  ✓  ALL CHECKS PASSED[0m

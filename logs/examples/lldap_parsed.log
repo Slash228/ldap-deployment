@@ -1,0 +1,29 @@
+# LDAP Request Log — Mon 20 Apr 2026 21:46:43 MSK
+# Container: lldap  (last 1000 lines)
+
+## BIND operations (authentication / federation bind)
+  (none found)
+
+## SEARCH operations (user/group lookups by Keycloak)
+  (none found)
+
+## Errors / failed operations
+  2026-04-20T18:44:42.713546303+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:44:42.713548970+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "alice"
+  2026-04-20T18:46:39.204754968+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:46:39.204757176+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "alice"
+  2026-04-20T18:46:39.315311176+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:46:39.315313885+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "bob"
+  2026-04-20T18:46:39.426679260+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:46:39.426681051+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "carol"
+  2026-04-20T18:46:39.544433010+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:46:39.544435593+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "dave"
+  2026-04-20T18:46:39.651582093+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:46:39.651585135+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "eve"
+  2026-04-20T18:46:39.760214051+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+  2026-04-20T18:46:39.760221593+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "mallory"
+
+## User role / group assignment entries
+  2026-04-20T18:29:28.581630046+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_admin group, trying to create it
+  2026-04-20T18:29:28.584941838+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_password_manager group, trying to create it
+  2026-04-20T18:29:28.586834921+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_strict_readonly group, trying to create it

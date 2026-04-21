@@ -6,15 +6,15 @@ and a demo application, fully containerized via Docker Compose.
 ## Architecture
 
 **Components:**
-- **LLDAP** — lightweight LDAP server, source of truth for users and groups (port 3890 — LDAP, port 17170 — Web UI)
-- **PostgreSQL** — database backend for Keycloak
-- **Keycloak** — Identity Provider, federates users from LLDAP, issues OIDC tokens (port 8080)
-- **Demo App** — web service protected via OIDC, performs RBAC based on LDAP groups (port 3000)
+- **LLDAP** -- lightweight LDAP server, source of truth for users and groups (port 3890 LDAP, port 17170 Web UI)
+- **PostgreSQL** -- database backend for Keycloak
+- **Keycloak** -- Identity Provider, federates users from LLDAP, issues OIDC tokens (port 8080)
+- **Demo App** -- web service protected via OIDC, performs RBAC based on LDAP groups (port 3000)
 
 ## Naming Schema
 
 | Element    | Value                              |
-|------------|------------------------------------|
+|------------|-------------------------------------|
 | Base DN    | `dc=dnp,dc=local`                 |
 | Users OU   | `ou=people,dc=dnp,dc=local`       |
 | Groups OU  | `ou=groups,dc=dnp,dc=local`       |
@@ -24,7 +24,7 @@ and a demo application, fully containerized via Docker Compose.
 
 - Docker Desktop (macOS/Windows) or Docker Engine (Linux)
 - Docker Compose v2+
-- `ldap-utils` (for manual LDAP verification)
+- `ldap-utils` (for seed script and manual LDAP verification)
   - macOS: `brew install openldap`
   - Ubuntu/Debian: `sudo apt install ldap-utils`
 
@@ -75,7 +75,7 @@ Created automatically by the seed script (`scripts/seed/seed_users.sh`):
 | carol    | carol1234      | developers   | Developer-level access      |
 | dave     | dave12345      | viewers      | Read-only access            |
 | eve      | eve12345       | viewers      | Read-only access            |
-| mallory  | mallory1234    | *(none)*     | Access denial testing       |
+| mallory  | mallory1234    | (none)       | Access denial testing       |
 
 ## Manual LDAP Verification
 
@@ -101,20 +101,20 @@ ldapsearch -H ldap://localhost:3890 -x \
 See [docs/VALIDATION.md](docs/VALIDATION.md) for full details.
 
 ```bash
-bash scripts/validation/smoke_test.sh          # quick check
-/opt/homebrew/bin/bash scripts/validation/run_validation.sh  # full suite
+bash scripts/validation/smoke_test.sh        # quick check
+bash scripts/validation/run_validation.sh    # full suite
 ```
 
 Results: **35/35 checks passed**
 
-| Scenario | Coverage |
-|----------|----------|
-| Login/logout for 6 users | ✅ |
-| Wrong password rejection | ✅ |
-| mallory → /unauthorized (no group) | ✅ |
-| /admin → admins only | ✅ |
-| Token revocation on logout | ✅ |
-| LDAP + Keycloak logs | ✅ |
+| Scenario | Status |
+|----------|--------|
+| Login/logout for 6 users | PASS |
+| Wrong password rejection | PASS |
+| mallory denied (no group) | PASS |
+| /admin restricted to admins only | PASS |
+| Token revocation on logout | PASS |
+| LDAP + Keycloak logs collected | PASS |
 
 ## Project Structure
 

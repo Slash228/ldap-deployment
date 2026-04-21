@@ -5,262 +5,291 @@
 
 Loading configuration from /data/lldap_config.toml
 WARNING: A key_seed was given, we will ignore the key_file and generate one from the seed! Set key_file to an empty string in the config to silence this message.
-2026-04-20T18:29:28.519934713+00:00  INFO     set_up_server [ 73.4ms | 100.00% ]
-2026-04-20T18:29:28.519957255+00:00  INFO     ┝━ ｉ [info]: Starting LLDAP version 0.6.2
-2026-04-20T18:29:28.540041963+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema from version 1
-2026-04-20T18:29:28.540043338+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 2
-2026-04-20T18:29:28.543710046+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 3
-2026-04-20T18:29:28.548808755+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 4
-2026-04-20T18:29:28.550947546+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 5
-2026-04-20T18:29:28.554695338+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 6
-2026-04-20T18:29:28.557422005+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 7
-2026-04-20T18:29:28.560483005+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 8
-2026-04-20T18:29:28.562689755+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 9
-2026-04-20T18:29:28.564789921+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 10
-2026-04-20T18:29:28.581630046+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_admin group, trying to create it
-2026-04-20T18:29:28.584941838+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_password_manager group, trying to create it
-2026-04-20T18:29:28.586834921+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_strict_readonly group, trying to create it
-2026-04-20T18:29:28.588797921+00:00  WARN     ┝━ 🚧 [warn]: Could not find an admin user, trying to create the user "admin" with the config-provided password
-2026-04-20T18:29:28.623063671+00:00  INFO     ┝━ ｉ [info]: Successfully (re)set password for "admin"
-2026-04-20T18:29:28.625231380+00:00  INFO     ┝━ ｉ [info]: Starting the LDAP server on port 3890
-2026-04-20T18:29:28.625387421+00:00  INFO     ┕━ ｉ [info]: Starting the API/web server on port 17170
-2026-04-20T18:29:28.625595588+00:00  INFO     ｉ [info]: starting 1 workers
-2026-04-20T18:29:28.625597838+00:00  INFO     ｉ [info]: Actix runtime found; starting in Actix runtime
-2026-04-20T18:29:28.625617838+00:00  INFO     ｉ [info]: starting service: "ldap", workers: 1, listening on: 0.0.0.0:3890
-2026-04-20T18:29:28.625619671+00:00  INFO     ｉ [info]: starting service: "http", workers: 1, listening on: 0.0.0.0:17170
-2026-04-20T18:29:28.626921463+00:00  INFO     ｉ [info]: DB Cleanup Cron started
-2026-04-20T18:29:54.855441628+00:00  INFO     ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:54.989722086+00:00  INFO     ｉ [info]: LDAP session start: ae98fe90-152e-49fb-bc5a-c178440eafb9
-2026-04-20T18:29:54.989943753+00:00  INFO     LDAP request [ 21.3ms | 100.00% ] session_id: ae98fe90-152e-49fb-bc5a-c178440eafb9
-2026-04-20T18:29:54.990057169+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:55.011631586+00:00  INFO     LDAP request [ 22.1ms | 100.00% ] session_id: ae98fe90-152e-49fb-bc5a-c178440eafb9
-2026-04-20T18:29:55.033873836+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "alice"
-2026-04-20T18:29:55.034547253+00:00  INFO     LDAP request [ 128µs | 100.00% ] session_id: ae98fe90-152e-49fb-bc5a-c178440eafb9
-2026-04-20T18:29:55.034683545+00:00  INFO     ｉ [info]: LDAP session end: ae98fe90-152e-49fb-bc5a-c178440eafb9
-2026-04-20T18:29:55.065988586+00:00  INFO     ｉ [info]: LDAP session start: 116f71e8-7e92-4a11-8886-1e2d731a8eba
-2026-04-20T18:29:55.066005711+00:00  INFO     LDAP request [ 22.2ms | 100.00% ] session_id: 116f71e8-7e92-4a11-8886-1e2d731a8eba
-2026-04-20T18:29:55.066111170+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:55.088604670+00:00  INFO     LDAP request [ 23.6ms | 100.00% ] session_id: 116f71e8-7e92-4a11-8886-1e2d731a8eba
-2026-04-20T18:29:55.112394670+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "bob"
-2026-04-20T18:29:55.112677878+00:00  INFO     LDAP request [ 1.00µs | 100.00% ] session_id: 116f71e8-7e92-4a11-8886-1e2d731a8eba
-2026-04-20T18:29:55.112685670+00:00  INFO     ｉ [info]: LDAP session end: 116f71e8-7e92-4a11-8886-1e2d731a8eba
-2026-04-20T18:29:55.144315045+00:00  INFO     ｉ [info]: LDAP session start: 2a90e663-13ee-4dbe-92df-542b799a2f2e
-2026-04-20T18:29:55.144330461+00:00  INFO     LDAP request [ 23.1ms | 100.00% ] session_id: 2a90e663-13ee-4dbe-92df-542b799a2f2e
-2026-04-20T18:29:55.144439920+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:55.167918295+00:00  INFO     LDAP request [ 20.8ms | 100.00% ] session_id: 2a90e663-13ee-4dbe-92df-542b799a2f2e
-2026-04-20T18:29:55.188933003+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "carol"
-2026-04-20T18:29:55.189205378+00:00  INFO     LDAP request [ 1.08µs | 100.00% ] session_id: 2a90e663-13ee-4dbe-92df-542b799a2f2e
-2026-04-20T18:29:55.189213795+00:00  INFO     ｉ [info]: LDAP session end: 2a90e663-13ee-4dbe-92df-542b799a2f2e
-2026-04-20T18:29:55.219546336+00:00  INFO     ｉ [info]: LDAP session start: a831fc3c-b9ba-4a66-9ab0-53f6e99104ee
-2026-04-20T18:29:55.219560461+00:00  INFO     LDAP request [ 22.8ms | 100.00% ] session_id: a831fc3c-b9ba-4a66-9ab0-53f6e99104ee
-2026-04-20T18:29:55.219694003+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:55.242789378+00:00  INFO     LDAP request [ 21.3ms | 100.00% ] session_id: a831fc3c-b9ba-4a66-9ab0-53f6e99104ee
-2026-04-20T18:29:55.264267461+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "dave"
-2026-04-20T18:29:55.264537045+00:00  INFO     LDAP request [ 1.08µs | 100.00% ] session_id: a831fc3c-b9ba-4a66-9ab0-53f6e99104ee
-2026-04-20T18:29:55.264546086+00:00  INFO     ｉ [info]: LDAP session end: a831fc3c-b9ba-4a66-9ab0-53f6e99104ee
-2026-04-20T18:29:55.299208795+00:00  INFO     ｉ [info]: LDAP session start: bc40f5cc-22f7-43bc-9d84-c8e34a17c396
-2026-04-20T18:29:55.299224836+00:00  INFO     LDAP request [ 23.2ms | 100.00% ] session_id: bc40f5cc-22f7-43bc-9d84-c8e34a17c396
-2026-04-20T18:29:55.299315753+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:55.322818670+00:00  INFO     LDAP request [ 20.9ms | 100.00% ] session_id: bc40f5cc-22f7-43bc-9d84-c8e34a17c396
-2026-04-20T18:29:55.343975711+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "eve"
-2026-04-20T18:29:55.344230711+00:00  INFO     LDAP request [ 709ns | 100.00% ] session_id: bc40f5cc-22f7-43bc-9d84-c8e34a17c396
-2026-04-20T18:29:55.344238461+00:00  INFO     ｉ [info]: LDAP session end: bc40f5cc-22f7-43bc-9d84-c8e34a17c396
-2026-04-20T18:29:55.377250920+00:00  INFO     ｉ [info]: LDAP session start: 7665e293-8429-4509-9f8c-18365eafae6b
-2026-04-20T18:29:55.377265503+00:00  INFO     LDAP request [ 22.7ms | 100.00% ] session_id: 7665e293-8429-4509-9f8c-18365eafae6b
-2026-04-20T18:29:55.377352628+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:29:55.400369086+00:00  INFO     LDAP request [ 21.0ms | 100.00% ] session_id: 7665e293-8429-4509-9f8c-18365eafae6b
-2026-04-20T18:29:55.421556128+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "mallory"
-2026-04-20T18:29:55.421840670+00:00  INFO     LDAP request [ 959ns | 100.00% ] session_id: 7665e293-8429-4509-9f8c-18365eafae6b
-2026-04-20T18:29:55.421848128+00:00  INFO     ｉ [info]: LDAP session end: 7665e293-8429-4509-9f8c-18365eafae6b
-2026-04-20T18:44:18.523451166+00:00  INFO     ｉ [info]: LDAP session start: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:18.525322750+00:00  INFO     LDAP request [ 32.2ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:18.525889583+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:18.558372+00:00     INFO     LDAP request [ 810µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:18.625170791+00:00  INFO     LDAP request [ 35.5ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:18.625293166+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:18.661009+00:00     INFO     LDAP request [ 540µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:18.661947666+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:18.661952333+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:18.661956291+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:18.661957291+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:18.661958291+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:18.661959333+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:18.661960208+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:19.675953167+00:00  INFO     LDAP request [ 20.9ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:19.676082709+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:19.697237334+00:00  INFO     LDAP request [ 486µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.388383053+00:00  INFO     LDAP request [ 33.0ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.388710803+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:42.421824928+00:00  INFO     LDAP request [ 612µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.422785094+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:42.423185594+00:00  INFO     LDAP request [ 25.6µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.430054053+00:00  INFO     ｉ [info]: LDAP session start: f15b702d-87af-4987-b42d-c5390d9324cf
-2026-04-20T18:44:42.430367469+00:00  INFO     LDAP request [ 22.0ms | 100.00% ] session_id: f15b702d-87af-4987-b42d-c5390d9324cf
-2026-04-20T18:44:42.430497053+00:00  INFO     ┕━ ｉ [info]: Login attempt for "alice"
-2026-04-20T18:44:42.452737511+00:00  INFO     LDAP request [ 833ns | 100.00% ] session_id: f15b702d-87af-4987-b42d-c5390d9324cf
-2026-04-20T18:44:42.452745261+00:00  INFO     ｉ [info]: LDAP session end: f15b702d-87af-4987-b42d-c5390d9324cf
-2026-04-20T18:44:42.476027011+00:00  INFO     LDAP request [ 21.0ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.476153053+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:42.497432011+00:00  INFO     LDAP request [ 582µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.663809886+00:00  INFO     LDAP request [ 26.3ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.663953886+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:42.690472511+00:00  INFO     LDAP request [ 372µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.691175220+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:42.691404261+00:00  INFO     LDAP request [ 5.17µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.691758261+00:00  INFO     ｉ [info]: LDAP session start: 581021a3-1238-4835-946b-066f6edfaaf3
-2026-04-20T18:44:42.691923886+00:00  INFO     LDAP request [ 21.6ms | 100.00% ] session_id: 581021a3-1238-4835-946b-066f6edfaaf3
-2026-04-20T18:44:42.692005970+00:00  INFO     ┝━ ｉ [info]: Login attempt for "alice"
-2026-04-20T18:44:42.713546303+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:44:42.713548970+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "alice"
-2026-04-20T18:44:42.714175095+00:00  INFO     ｉ [info]: LDAP session end: 581021a3-1238-4835-946b-066f6edfaaf3
-2026-04-20T18:44:42.777856511+00:00  INFO     LDAP request [ 25.0ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.777990720+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:42.803179886+00:00  INFO     LDAP request [ 384µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.803885011+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:44:42.804174761+00:00  INFO     LDAP request [ 4.17µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.807531136+00:00  INFO     ｉ [info]: LDAP session start: b1cba8b6-63e5-436f-a10c-346531b63547
-2026-04-20T18:44:42.807675928+00:00  INFO     LDAP request [ 22.6ms | 100.00% ] session_id: b1cba8b6-63e5-436f-a10c-346531b63547
-2026-04-20T18:44:42.807758928+00:00  INFO     ┕━ ｉ [info]: Login attempt for "mallory"
-2026-04-20T18:44:42.830622970+00:00  INFO     LDAP request [ 834ns | 100.00% ] session_id: b1cba8b6-63e5-436f-a10c-346531b63547
-2026-04-20T18:44:42.830631095+00:00  INFO     ｉ [info]: LDAP session end: b1cba8b6-63e5-436f-a10c-346531b63547
-2026-04-20T18:44:42.834089845+00:00  INFO     LDAP request [ 20.9ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:44:42.834191386+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:44:42.876110928+00:00  INFO     LDAP request [ 473µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.454207675+00:00  INFO     LDAP request [ 50.6ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.468324925+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:37.514055092+00:00  INFO     LDAP request [ 792µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.515226717+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:37.515637884+00:00  INFO     LDAP request [ 29.1µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.516741300+00:00  INFO     ｉ [info]: LDAP session start: 05a6bf52-0d4f-454c-8fe5-b6b0e1ff5f2b
-2026-04-20T18:46:37.517014759+00:00  INFO     LDAP request [ 23.8ms | 100.00% ] session_id: 05a6bf52-0d4f-454c-8fe5-b6b0e1ff5f2b
-2026-04-20T18:46:37.517106342+00:00  INFO     ┕━ ｉ [info]: Login attempt for "alice"
-2026-04-20T18:46:37.541132884+00:00  INFO     LDAP request [ 833ns | 100.00% ] session_id: 05a6bf52-0d4f-454c-8fe5-b6b0e1ff5f2b
-2026-04-20T18:46:37.541139759+00:00  INFO     ｉ [info]: LDAP session end: 05a6bf52-0d4f-454c-8fe5-b6b0e1ff5f2b
-2026-04-20T18:46:37.709771884+00:00  INFO     LDAP request [ 32.2ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.709979050+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:37.742314759+00:00  INFO     LDAP request [ 411µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.743094009+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:37.743373884+00:00  INFO     LDAP request [ 5.17µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.746345425+00:00  INFO     ｉ [info]: LDAP session start: 4c768030-76a2-480d-a939-8de90eb4ae85
-2026-04-20T18:46:37.746517050+00:00  INFO     LDAP request [ 23.2ms | 100.00% ] session_id: 4c768030-76a2-480d-a939-8de90eb4ae85
-2026-04-20T18:46:37.746615550+00:00  INFO     ┕━ ｉ [info]: Login attempt for "bob"
-2026-04-20T18:46:37.770044550+00:00  INFO     LDAP request [ 792ns | 100.00% ] session_id: 4c768030-76a2-480d-a939-8de90eb4ae85
-2026-04-20T18:46:37.770056967+00:00  INFO     ｉ [info]: LDAP session end: 4c768030-76a2-480d-a939-8de90eb4ae85
-2026-04-20T18:46:37.773628425+00:00  INFO     LDAP request [ 21.3ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.773727717+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:37.816094051+00:00  INFO     LDAP request [ 504µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.985365884+00:00  INFO     LDAP request [ 25.9ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:37.985512301+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.011681176+00:00  INFO     LDAP request [ 394µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.012414676+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:38.012630051+00:00  INFO     LDAP request [ 4.46µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.014531592+00:00  INFO     ｉ [info]: LDAP session start: b9cf0655-a09a-4027-8460-053c10fe536d
-2026-04-20T18:46:38.014716342+00:00  INFO     LDAP request [ 25.9ms | 100.00% ] session_id: b9cf0655-a09a-4027-8460-053c10fe536d
-2026-04-20T18:46:38.014847759+00:00  INFO     ┕━ ｉ [info]: Login attempt for "carol"
-2026-04-20T18:46:38.040928759+00:00  INFO     LDAP request [ 1.12µs | 100.00% ] session_id: b9cf0655-a09a-4027-8460-053c10fe536d
-2026-04-20T18:46:38.040936176+00:00  INFO     ｉ [info]: LDAP session end: b9cf0655-a09a-4027-8460-053c10fe536d
-2026-04-20T18:46:38.044180801+00:00  INFO     LDAP request [ 22.2ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.044284926+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.085136009+00:00  INFO     LDAP request [ 458µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.259392426+00:00  INFO     LDAP request [ 32.2ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.259616509+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.292018342+00:00  INFO     LDAP request [ 396µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.292758842+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:38.293021926+00:00  INFO     LDAP request [ 5.04µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.295169051+00:00  INFO     ｉ [info]: LDAP session start: 93c45027-d533-47f6-a56d-ca27f71e8b59
-2026-04-20T18:46:38.295394759+00:00  INFO     LDAP request [ 24.0ms | 100.00% ] session_id: 93c45027-d533-47f6-a56d-ca27f71e8b59
-2026-04-20T18:46:38.295478342+00:00  INFO     ┕━ ｉ [info]: Login attempt for "dave"
-2026-04-20T18:46:38.319774134+00:00  INFO     LDAP request [ 999ns | 100.00% ] session_id: 93c45027-d533-47f6-a56d-ca27f71e8b59
-2026-04-20T18:46:38.319783134+00:00  INFO     ｉ [info]: LDAP session end: 93c45027-d533-47f6-a56d-ca27f71e8b59
-2026-04-20T18:46:38.323261676+00:00  INFO     LDAP request [ 21.6ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.323370051+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.364077051+00:00  INFO     LDAP request [ 484µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.538261884+00:00  INFO     LDAP request [ 31.4ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.538385468+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.570127301+00:00  INFO     LDAP request [ 424µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.570920551+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:38.571155343+00:00  INFO     LDAP request [ 5.25µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.573385593+00:00  INFO     ｉ [info]: LDAP session start: c1864f60-b68a-4feb-ba84-26eedd6d3b3e
-2026-04-20T18:46:38.573573968+00:00  INFO     LDAP request [ 25.3ms | 100.00% ] session_id: c1864f60-b68a-4feb-ba84-26eedd6d3b3e
-2026-04-20T18:46:38.573669468+00:00  INFO     ┕━ ｉ [info]: Login attempt for "eve"
-2026-04-20T18:46:38.599239093+00:00  INFO     LDAP request [ 1.04µs | 100.00% ] session_id: c1864f60-b68a-4feb-ba84-26eedd6d3b3e
-2026-04-20T18:46:38.599249093+00:00  INFO     ｉ [info]: LDAP session end: c1864f60-b68a-4feb-ba84-26eedd6d3b3e
-2026-04-20T18:46:38.602596301+00:00  INFO     LDAP request [ 21.9ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.602712259+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.643850468+00:00  INFO     LDAP request [ 479µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.813049634+00:00  INFO     LDAP request [ 28.6ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.813181759+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:38.842024176+00:00  INFO     LDAP request [ 411µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.842769134+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:38.843013634+00:00  INFO     LDAP request [ 5.46µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:38.843383759+00:00  INFO     ｉ [info]: LDAP session start: 2d10538a-846b-4f55-ac22-9a35b2d51d24
-2026-04-20T18:46:38.843526926+00:00  INFO     LDAP request [ 23.4ms | 100.00% ] session_id: 2d10538a-846b-4f55-ac22-9a35b2d51d24
-2026-04-20T18:46:38.843605468+00:00  INFO     ┕━ ｉ [info]: Login attempt for "mallory"
-2026-04-20T18:46:38.867217384+00:00  INFO     LDAP request [ 1.08µs | 100.00% ] session_id: 2d10538a-846b-4f55-ac22-9a35b2d51d24
-2026-04-20T18:46:38.867224176+00:00  INFO     ｉ [info]: LDAP session end: 2d10538a-846b-4f55-ac22-9a35b2d51d24
-2026-04-20T18:46:39.154000926+00:00  INFO     LDAP request [ 26.3ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.154148634+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:39.180676509+00:00  INFO     LDAP request [ 366µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.181405176+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:39.181647426+00:00  INFO     LDAP request [ 4.17µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.181998093+00:00  INFO     ｉ [info]: LDAP session start: b5870d92-6315-4806-af24-1f1b93173b33
-2026-04-20T18:46:39.182187551+00:00  INFO     LDAP request [ 22.6ms | 100.00% ] session_id: b5870d92-6315-4806-af24-1f1b93173b33
-2026-04-20T18:46:39.182272384+00:00  INFO     ┝━ ｉ [info]: Login attempt for "alice"
-2026-04-20T18:46:39.204754968+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:46:39.204757176+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "alice"
-2026-04-20T18:46:39.204976510+00:00  INFO     ｉ [info]: LDAP session end: b5870d92-6315-4806-af24-1f1b93173b33
-2026-04-20T18:46:39.266924843+00:00  INFO     LDAP request [ 25.2ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.267050843+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:39.292425718+00:00  INFO     LDAP request [ 398µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.293166968+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:39.293422051+00:00  INFO     LDAP request [ 5.54µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.293745635+00:00  INFO     ｉ [info]: LDAP session start: 4d6bcb00-4fbd-4bac-b80a-aa7d047d6a47
-2026-04-20T18:46:39.293875385+00:00  INFO     LDAP request [ 21.5ms | 100.00% ] session_id: 4d6bcb00-4fbd-4bac-b80a-aa7d047d6a47
-2026-04-20T18:46:39.293946843+00:00  INFO     ┝━ ｉ [info]: Login attempt for "bob"
-2026-04-20T18:46:39.315311176+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:46:39.315313885+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "bob"
-2026-04-20T18:46:39.315543926+00:00  INFO     ｉ [info]: LDAP session end: 4d6bcb00-4fbd-4bac-b80a-aa7d047d6a47
-2026-04-20T18:46:39.378133301+00:00  INFO     LDAP request [ 24.9ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.378266051+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:39.403410635+00:00  INFO     LDAP request [ 396µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.404130676+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:39.404372593+00:00  INFO     LDAP request [ 5.08µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.404646885+00:00  INFO     ｉ [info]: LDAP session start: 10dd2cab-2efe-4614-8c4c-58c7a1384c20
-2026-04-20T18:46:39.404789010+00:00  INFO     LDAP request [ 21.9ms | 100.00% ] session_id: 10dd2cab-2efe-4614-8c4c-58c7a1384c20
-2026-04-20T18:46:39.404858968+00:00  INFO     ┝━ ｉ [info]: Login attempt for "carol"
-2026-04-20T18:46:39.426679260+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:46:39.426681051+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "carol"
-2026-04-20T18:46:39.426917176+00:00  INFO     ｉ [info]: LDAP session end: 10dd2cab-2efe-4614-8c4c-58c7a1384c20
-2026-04-20T18:46:39.491343010+00:00  INFO     LDAP request [ 25.4ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.491469218+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:39.517103593+00:00  INFO     LDAP request [ 384µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.517801801+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:39.518003676+00:00  INFO     LDAP request [ 4.96µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.518277260+00:00  INFO     ｉ [info]: LDAP session start: 5a59357f-2a25-4fc2-ae4f-5abf459499c3
-2026-04-20T18:46:39.518419593+00:00  INFO     LDAP request [ 26.0ms | 100.00% ] session_id: 5a59357f-2a25-4fc2-ae4f-5abf459499c3
-2026-04-20T18:46:39.518500760+00:00  INFO     ┝━ ｉ [info]: Login attempt for "dave"
-2026-04-20T18:46:39.544433010+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:46:39.544435593+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "dave"
-2026-04-20T18:46:39.544660510+00:00  INFO     ｉ [info]: LDAP session end: 5a59357f-2a25-4fc2-ae4f-5abf459499c3
-2026-04-20T18:46:39.602268343+00:00  INFO     LDAP request [ 25.0ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.602410385+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:39.627594593+00:00  INFO     LDAP request [ 388µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.628315093+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:39.628542968+00:00  INFO     LDAP request [ 3.79µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.628818176+00:00  INFO     ｉ [info]: LDAP session start: 8f330d26-7353-4719-b58b-c8de3ff8d72f
-2026-04-20T18:46:39.628978260+00:00  INFO     LDAP request [ 22.6ms | 100.00% ] session_id: 8f330d26-7353-4719-b58b-c8de3ff8d72f
-2026-04-20T18:46:39.629046968+00:00  INFO     ┝━ ｉ [info]: Login attempt for "eve"
-2026-04-20T18:46:39.651582093+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:46:39.651585135+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "eve"
-2026-04-20T18:46:39.651876926+00:00  INFO     ｉ [info]: LDAP session end: 8f330d26-7353-4719-b58b-c8de3ff8d72f
-2026-04-20T18:46:39.709980426+00:00  INFO     LDAP request [ 23.3ms | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.710115093+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
-2026-04-20T18:46:39.733702426+00:00  INFO     LDAP request [ 404µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.734469843+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
-2026-04-20T18:46:39.734696301+00:00  INFO     LDAP request [ 6.29µs | 100.00% ] session_id: 93632376-8b5e-4766-9e59-eac6d506b6b4
-2026-04-20T18:46:39.735001051+00:00  INFO     ｉ [info]: LDAP session start: 0b448cff-1669-4bcf-9128-2fec8c73e747
-2026-04-20T18:46:39.735153301+00:00  INFO     LDAP request [ 25.1ms | 100.00% ] session_id: 0b448cff-1669-4bcf-9128-2fec8c73e747
-2026-04-20T18:46:39.735231093+00:00  INFO     ┝━ ｉ [info]: Login attempt for "mallory"
-2026-04-20T18:46:39.760214051+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
-2026-04-20T18:46:39.760221593+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "mallory"
-2026-04-20T18:46:39.760725301+00:00  INFO     ｉ [info]: LDAP session end: 0b448cff-1669-4bcf-9128-2fec8c73e747
+2026-04-21T11:05:18.572264712+00:00  INFO     set_up_server [ 142ms | 100.00% ]
+2026-04-21T11:05:18.572855087+00:00  INFO     ┝━ ｉ [info]: Starting LLDAP version 0.6.2
+2026-04-21T11:05:18.628726004+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema from version 1
+2026-04-21T11:05:18.628728254+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 2
+2026-04-21T11:05:18.636252087+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 3
+2026-04-21T11:05:18.645268671+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 4
+2026-04-21T11:05:18.655526754+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 5
+2026-04-21T11:05:18.664417254+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 6
+2026-04-21T11:05:18.670985462+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 7
+2026-04-21T11:05:18.677638379+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 8
+2026-04-21T11:05:18.681586629+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 9
+2026-04-21T11:05:18.687287837+00:00  INFO     ┝━ ｉ [info]: Upgrading DB schema to version 10
+2026-04-21T11:05:18.706436004+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_admin group, trying to create it
+2026-04-21T11:05:18.711600754+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_password_manager group, trying to create it
+2026-04-21T11:05:18.716128962+00:00  WARN     ┝━ 🚧 [warn]: Could not find lldap_strict_readonly group, trying to create it
+2026-04-21T11:05:18.722227671+00:00  WARN     ┝━ 🚧 [warn]: Could not find an admin user, trying to create the user "admin" with the config-provided password
+2026-04-21T11:05:18.787339462+00:00  INFO     ┝━ ｉ [info]: Successfully (re)set password for "admin"
+2026-04-21T11:05:18.792303254+00:00  INFO     ┝━ ｉ [info]: Starting the LDAP server on port 3890
+2026-04-21T11:05:18.792727754+00:00  INFO     ┕━ ｉ [info]: Starting the API/web server on port 17170
+2026-04-21T11:05:18.792884296+00:00  INFO     ｉ [info]: starting 1 workers
+2026-04-21T11:05:18.792886962+00:00  INFO     ｉ [info]: Actix runtime found; starting in Actix runtime
+2026-04-21T11:05:18.793518171+00:00  INFO     ｉ [info]: starting service: "ldap", workers: 1, listening on: 0.0.0.0:3890
+2026-04-21T11:05:18.793524629+00:00  INFO     ｉ [info]: starting service: "http", workers: 1, listening on: 0.0.0.0:17170
+2026-04-21T11:05:18.795688337+00:00  INFO     ｉ [info]: DB Cleanup Cron started
+2026-04-21T11:05:48.462074004+00:00  INFO     ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:48.846686129+00:00  INFO     ｉ [info]: LDAP session start: f2eb0a6d-4ff6-4ad3-83f0-3c9019ea67a5
+2026-04-21T11:05:48.847237296+00:00  INFO     LDAP request [ 61.4ms | 100.00% ] session_id: f2eb0a6d-4ff6-4ad3-83f0-3c9019ea67a5
+2026-04-21T11:05:48.847508004+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:48.909575421+00:00  INFO     LDAP request [ 48.5ms | 100.00% ] session_id: f2eb0a6d-4ff6-4ad3-83f0-3c9019ea67a5
+2026-04-21T11:05:48.958637462+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "alice"
+2026-04-21T11:05:48.959290212+00:00  INFO     LDAP request [ 10.2µs | 100.00% ] session_id: f2eb0a6d-4ff6-4ad3-83f0-3c9019ea67a5
+2026-04-21T11:05:48.959313296+00:00  INFO     ｉ [info]: LDAP session end: f2eb0a6d-4ff6-4ad3-83f0-3c9019ea67a5
+2026-04-21T11:05:49.000559087+00:00  INFO     ｉ [info]: LDAP session start: a90c6375-8847-43d1-b3fe-58108dbe93ea
+2026-04-21T11:05:49.000601087+00:00  INFO     LDAP request [ 36.9ms | 100.00% ] session_id: a90c6375-8847-43d1-b3fe-58108dbe93ea
+2026-04-21T11:05:49.000847296+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:49.038438254+00:00  INFO     LDAP request [ 57.9ms | 100.00% ] session_id: a90c6375-8847-43d1-b3fe-58108dbe93ea
+2026-04-21T11:05:49.096894629+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "bob"
+2026-04-21T11:05:49.097669379+00:00  INFO     LDAP request [ 3.58µs | 100.00% ] session_id: a90c6375-8847-43d1-b3fe-58108dbe93ea
+2026-04-21T11:05:49.097708296+00:00  INFO     ｉ [info]: LDAP session end: a90c6375-8847-43d1-b3fe-58108dbe93ea
+2026-04-21T11:05:49.145777713+00:00  INFO     ｉ [info]: LDAP session start: 15c8e25c-500c-49a0-8287-9e2bae8bd8af
+2026-04-21T11:05:49.145871004+00:00  INFO     LDAP request [ 59.3ms | 100.00% ] session_id: 15c8e25c-500c-49a0-8287-9e2bae8bd8af
+2026-04-21T11:05:49.146249171+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:49.206147796+00:00  INFO     LDAP request [ 36.8ms | 100.00% ] session_id: 15c8e25c-500c-49a0-8287-9e2bae8bd8af
+2026-04-21T11:05:49.243124879+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "carol"
+2026-04-21T11:05:49.244090129+00:00  INFO     LDAP request [ 2.71µs | 100.00% ] session_id: 15c8e25c-500c-49a0-8287-9e2bae8bd8af
+2026-04-21T11:05:49.244134213+00:00  INFO     ｉ [info]: LDAP session end: 15c8e25c-500c-49a0-8287-9e2bae8bd8af
+2026-04-21T11:05:49.288198004+00:00  INFO     ｉ [info]: LDAP session start: 29c72cbe-153d-409c-95bb-e2e0ee3b95b4
+2026-04-21T11:05:49.288375171+00:00  INFO     LDAP request [ 43.3ms | 100.00% ] session_id: 29c72cbe-153d-409c-95bb-e2e0ee3b95b4
+2026-04-21T11:05:49.288606629+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:49.332529754+00:00  INFO     LDAP request [ 36.5ms | 100.00% ] session_id: 29c72cbe-153d-409c-95bb-e2e0ee3b95b4
+2026-04-21T11:05:49.369347588+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "dave"
+2026-04-21T11:05:49.369928129+00:00  INFO     LDAP request [ 1.50µs | 100.00% ] session_id: 29c72cbe-153d-409c-95bb-e2e0ee3b95b4
+2026-04-21T11:05:49.369940379+00:00  INFO     ｉ [info]: LDAP session end: 29c72cbe-153d-409c-95bb-e2e0ee3b95b4
+2026-04-21T11:05:49.425097713+00:00  INFO     ｉ [info]: LDAP session start: 487e80b2-91a2-4724-bab2-010b6008db24
+2026-04-21T11:05:49.425137463+00:00  INFO     LDAP request [ 35.2ms | 100.00% ] session_id: 487e80b2-91a2-4724-bab2-010b6008db24
+2026-04-21T11:05:49.425730088+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:49.461266004+00:00  INFO     LDAP request [ 35.5ms | 100.00% ] session_id: 487e80b2-91a2-4724-bab2-010b6008db24
+2026-04-21T11:05:49.497137671+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "eve"
+2026-04-21T11:05:49.497718296+00:00  INFO     LDAP request [ 1.62µs | 100.00% ] session_id: 487e80b2-91a2-4724-bab2-010b6008db24
+2026-04-21T11:05:49.497730254+00:00  INFO     ｉ [info]: LDAP session end: 487e80b2-91a2-4724-bab2-010b6008db24
+2026-04-21T11:05:49.551474671+00:00  INFO     ｉ [info]: LDAP session start: 1dcde55d-6ce0-4404-b293-38b909255834
+2026-04-21T11:05:49.551530088+00:00  INFO     LDAP request [ 35.8ms | 100.00% ] session_id: 1dcde55d-6ce0-4404-b293-38b909255834
+2026-04-21T11:05:49.551767171+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:49.588488504+00:00  INFO     LDAP request [ 39.7ms | 100.00% ] session_id: 1dcde55d-6ce0-4404-b293-38b909255834
+2026-04-21T11:05:49.628822046+00:00  INFO     ┕━ ｉ [info]: Successfully (re)set password for "mallory"
+2026-04-21T11:05:49.629504796+00:00  INFO     LDAP request [ 5.29µs | 100.00% ] session_id: 1dcde55d-6ce0-4404-b293-38b909255834
+2026-04-21T11:05:49.629521754+00:00  INFO     ｉ [info]: LDAP session end: 1dcde55d-6ce0-4404-b293-38b909255834
+2026-04-21T11:05:51.442627755+00:00  INFO     ｉ [info]: LDAP session start: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:51.448936589+00:00  INFO     LDAP request [ 62.0ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:51.450041422+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:51.512798339+00:00  INFO     LDAP request [ 1.58ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:51.594266755+00:00  INFO     LDAP request [ 34.5ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:51.594451630+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:51.629322172+00:00  INFO     LDAP request [ 982µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:51.630705047+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.630711922+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.630722089+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.630723339+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.630724880+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.630726380+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.630727755+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:51.902747547+00:00  INFO     LDAP request [ 45.2ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:51.903012506+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:51.948581422+00:00  INFO     LDAP request [ 919µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:52.491810506+00:00  INFO     LDAP request [ 34.6ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:52.492111547+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:52.527310964+00:00  INFO     LDAP request [ 1.33ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:52.596794172+00:00  INFO     LDAP request [ 40.2ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:52.597524589+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:05:52.637863423+00:00  INFO     LDAP request [ 711µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:05:52.638831506+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:52.638834381+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:52.638836131+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:52.638837756+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:52.638839214+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:52.638840756+00:00  WARN     ┝━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:05:52.638842131+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:08:44.888053377+00:00  INFO     LDAP request [ 62.5ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:44.889374085+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:44.951459044+00:00  INFO     LDAP request [ 1.34ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:44.953313877+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:08:44.953844335+00:00  INFO     LDAP request [ 11.7µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:44.963110585+00:00  INFO     ｉ [info]: LDAP session start: 56be6c74-33c1-432b-ba1d-253534555fec
+2026-04-21T11:08:44.963599752+00:00  INFO     LDAP request [ 31.3ms | 100.00% ] session_id: 56be6c74-33c1-432b-ba1d-253534555fec
+2026-04-21T11:08:44.963777752+00:00  INFO     ┕━ ｉ [info]: Login attempt for "alice"
+2026-04-21T11:08:44.995542252+00:00  INFO     LDAP request [ 1.21µs | 100.00% ] session_id: 56be6c74-33c1-432b-ba1d-253534555fec
+2026-04-21T11:08:44.995553461+00:00  INFO     ｉ [info]: LDAP session end: 56be6c74-33c1-432b-ba1d-253534555fec
+2026-04-21T11:08:45.036851836+00:00  INFO     LDAP request [ 29.0ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.037033419+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:45.066528169+00:00  INFO     LDAP request [ 1.87ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.357660961+00:00  INFO     LDAP request [ 37.9ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.357840794+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:45.396080627+00:00  INFO     LDAP request [ 665µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.397229752+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:08:45.397540877+00:00  INFO     LDAP request [ 6.46µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.398133002+00:00  INFO     ｉ [info]: LDAP session start: d4eedd7d-59e5-4448-a053-d39499028cea
+2026-04-21T11:08:45.398326669+00:00  INFO     LDAP request [ 29.6ms | 100.00% ] session_id: d4eedd7d-59e5-4448-a053-d39499028cea
+2026-04-21T11:08:45.398448961+00:00  INFO     ┝━ ｉ [info]: Login attempt for "alice"
+2026-04-21T11:08:45.427881961+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:08:45.427886711+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "alice"
+2026-04-21T11:08:45.430140794+00:00  INFO     ｉ [info]: LDAP session end: d4eedd7d-59e5-4448-a053-d39499028cea
+2026-04-21T11:08:45.535973919+00:00  INFO     LDAP request [ 38.3ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.536271294+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:45.574942211+00:00  INFO     LDAP request [ 615µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.576133461+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:08:45.576463169+00:00  INFO     LDAP request [ 6.50µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.579264919+00:00  INFO     ｉ [info]: LDAP session start: 0221e9d7-92bd-4821-9cdb-2d9b3320ca88
+2026-04-21T11:08:45.579527169+00:00  INFO     LDAP request [ 37.3ms | 100.00% ] session_id: 0221e9d7-92bd-4821-9cdb-2d9b3320ca88
+2026-04-21T11:08:45.579684169+00:00  INFO     ┕━ ｉ [info]: Login attempt for "mallory"
+2026-04-21T11:08:45.617361836+00:00  INFO     LDAP request [ 1.63µs | 100.00% ] session_id: 0221e9d7-92bd-4821-9cdb-2d9b3320ca88
+2026-04-21T11:08:45.617373336+00:00  INFO     ｉ [info]: LDAP session end: 0221e9d7-92bd-4821-9cdb-2d9b3320ca88
+2026-04-21T11:08:45.622756794+00:00  INFO     LDAP request [ 30.1ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.622931127+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:45.653451961+00:00  INFO     LDAP request [ 772µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.709033628+00:00  INFO     LDAP request [ 34.9ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.709250294+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:45.744516878+00:00  INFO     LDAP request [ 565µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.745564711+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:08:45.745864878+00:00  INFO     LDAP request [ 10.1µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.747452544+00:00  INFO     LDAP request [ 29.9ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:08:45.747570628+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:08:45.788734669+00:00  INFO     LDAP request [ 782µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.613152043+00:00  INFO     LDAP request [ 60.7ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.614799668+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:12.674722376+00:00  INFO     LDAP request [ 1.90ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.677310043+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:12.677895543+00:00  INFO     LDAP request [ 8.62µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.681751584+00:00  INFO     ｉ [info]: LDAP session start: d15c445e-a32a-41fe-9bb1-8a22d2bab97f
+2026-04-21T11:18:12.682443251+00:00  INFO     LDAP request [ 37.7ms | 100.00% ] session_id: d15c445e-a32a-41fe-9bb1-8a22d2bab97f
+2026-04-21T11:18:12.682580418+00:00  INFO     ┕━ ｉ [info]: Login attempt for "alice"
+2026-04-21T11:18:12.720623293+00:00  INFO     LDAP request [ 1.83µs | 100.00% ] session_id: d15c445e-a32a-41fe-9bb1-8a22d2bab97f
+2026-04-21T11:18:12.720640501+00:00  INFO     ｉ [info]: LDAP session end: d15c445e-a32a-41fe-9bb1-8a22d2bab97f
+2026-04-21T11:18:12.916164543+00:00  INFO     LDAP request [ 36.2ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.916701793+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:12.953037168+00:00  INFO     LDAP request [ 628µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.954201418+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:12.954558084+00:00  INFO     LDAP request [ 10.4µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.961849168+00:00  INFO     ｉ [info]: LDAP session start: bb92a6cd-89fc-4533-b845-b75b7bc4b811
+2026-04-21T11:18:12.962051501+00:00  INFO     LDAP request [ 30.1ms | 100.00% ] session_id: bb92a6cd-89fc-4533-b845-b75b7bc4b811
+2026-04-21T11:18:12.962210793+00:00  INFO     ┕━ ｉ [info]: Login attempt for "bob"
+2026-04-21T11:18:12.992667084+00:00  INFO     LDAP request [ 1.21µs | 100.00% ] session_id: bb92a6cd-89fc-4533-b845-b75b7bc4b811
+2026-04-21T11:18:12.992678876+00:00  INFO     ｉ [info]: LDAP session end: bb92a6cd-89fc-4533-b845-b75b7bc4b811
+2026-04-21T11:18:12.999116251+00:00  INFO     LDAP request [ 33.4ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:12.999243584+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.032956084+00:00  INFO     LDAP request [ 1.07ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.192710960+00:00  INFO     LDAP request [ 44.4ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.193136251+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.237798460+00:00  INFO     LDAP request [ 639µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.238963668+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:13.239340793+00:00  INFO     LDAP request [ 7.50µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.242711918+00:00  INFO     ｉ [info]: LDAP session start: 8b0a9a43-1506-4d9a-a0e1-5bc6b1115bee
+2026-04-21T11:18:13.243142376+00:00  INFO     LDAP request [ 29.9ms | 100.00% ] session_id: 8b0a9a43-1506-4d9a-a0e1-5bc6b1115bee
+2026-04-21T11:18:13.243263085+00:00  INFO     ┕━ ｉ [info]: Login attempt for "carol"
+2026-04-21T11:18:13.273518043+00:00  INFO     LDAP request [ 2.21µs | 100.00% ] session_id: 8b0a9a43-1506-4d9a-a0e1-5bc6b1115bee
+2026-04-21T11:18:13.273533251+00:00  INFO     ｉ [info]: LDAP session end: 8b0a9a43-1506-4d9a-a0e1-5bc6b1115bee
+2026-04-21T11:18:13.283711293+00:00  INFO     LDAP request [ 30.9ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.283852043+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.315140001+00:00  INFO     LDAP request [ 785µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.450231668+00:00  INFO     LDAP request [ 35.1ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.450396376+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.485876501+00:00  INFO     LDAP request [ 608µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.486989543+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:13.487380335+00:00  INFO     LDAP request [ 7.21µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.490245751+00:00  INFO     ｉ [info]: LDAP session start: 1757bf9d-b209-4e6c-ba9d-3a02c5e5f115
+2026-04-21T11:18:13.490449126+00:00  INFO     LDAP request [ 34.4ms | 100.00% ] session_id: 1757bf9d-b209-4e6c-ba9d-3a02c5e5f115
+2026-04-21T11:18:13.490571168+00:00  INFO     ┕━ ｉ [info]: Login attempt for "dave"
+2026-04-21T11:18:13.525442126+00:00  INFO     LDAP request [ 1.88µs | 100.00% ] session_id: 1757bf9d-b209-4e6c-ba9d-3a02c5e5f115
+2026-04-21T11:18:13.525455043+00:00  INFO     ｉ [info]: LDAP session end: 1757bf9d-b209-4e6c-ba9d-3a02c5e5f115
+2026-04-21T11:18:13.530999835+00:00  INFO     LDAP request [ 30.4ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.531168543+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.562011085+00:00  INFO     LDAP request [ 796µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.702372501+00:00  INFO     LDAP request [ 37.7ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.702517668+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.740555335+00:00  INFO     LDAP request [ 605µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.741710376+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:13.742075710+00:00  INFO     LDAP request [ 12.0µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.745406543+00:00  INFO     ｉ [info]: LDAP session start: 37294e16-2e0c-46d1-9dd0-d7920e0a4694
+2026-04-21T11:18:13.745649668+00:00  INFO     LDAP request [ 30.2ms | 100.00% ] session_id: 37294e16-2e0c-46d1-9dd0-d7920e0a4694
+2026-04-21T11:18:13.745831001+00:00  INFO     ┕━ ｉ [info]: Login attempt for "eve"
+2026-04-21T11:18:13.776406377+00:00  INFO     LDAP request [ 1.62µs | 100.00% ] session_id: 37294e16-2e0c-46d1-9dd0-d7920e0a4694
+2026-04-21T11:18:13.776418585+00:00  INFO     ｉ [info]: LDAP session end: 37294e16-2e0c-46d1-9dd0-d7920e0a4694
+2026-04-21T11:18:13.781568377+00:00  INFO     LDAP request [ 29.3ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.781703377+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.822465252+00:00  INFO     LDAP request [ 689µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.942252585+00:00  INFO     LDAP request [ 33.0ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.942399085+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:13.975839627+00:00  INFO     LDAP request [ 617µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.976944252+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:13.977279668+00:00  INFO     LDAP request [ 8.29µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:13.979252168+00:00  INFO     ｉ [info]: LDAP session start: 9e3416de-bc80-4141-b74c-5ad752a12da9
+2026-04-21T11:18:13.979465918+00:00  INFO     LDAP request [ 29.3ms | 100.00% ] session_id: 9e3416de-bc80-4141-b74c-5ad752a12da9
+2026-04-21T11:18:13.979552293+00:00  INFO     ┕━ ｉ [info]: Login attempt for "mallory"
+2026-04-21T11:18:14.009231002+00:00  INFO     LDAP request [ 1.54µs | 100.00% ] session_id: 9e3416de-bc80-4141-b74c-5ad752a12da9
+2026-04-21T11:18:14.009245418+00:00  INFO     ｉ [info]: LDAP session end: 9e3416de-bc80-4141-b74c-5ad752a12da9
+2026-04-21T11:18:14.199929710+00:00  INFO     LDAP request [ 31.2ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.200096210+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:14.231650668+00:00  INFO     LDAP request [ 566µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.232687335+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:14.233025252+00:00  INFO     LDAP request [ 6.71µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.234490793+00:00  INFO     LDAP request [ 30.5ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.234624918+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:14.276655668+00:00  INFO     LDAP request [ 964µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.420250043+00:00  INFO     LDAP request [ 37.6ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.420399252+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:14.458428085+00:00  INFO     LDAP request [ 659µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.459682627+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:14.460324835+00:00  INFO     LDAP request [ 7.25µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.460757877+00:00  INFO     ｉ [info]: LDAP session start: 90cec10d-66ab-4791-b121-989e5e6f60a7
+2026-04-21T11:18:14.460975043+00:00  INFO     LDAP request [ 29.9ms | 100.00% ] session_id: 90cec10d-66ab-4791-b121-989e5e6f60a7
+2026-04-21T11:18:14.461092877+00:00  INFO     ┝━ ｉ [info]: Login attempt for "alice"
+2026-04-21T11:18:14.490889960+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:18:14.490894710+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "alice"
+2026-04-21T11:18:14.491275960+00:00  INFO     ｉ [info]: LDAP session end: 90cec10d-66ab-4791-b121-989e5e6f60a7
+2026-04-21T11:18:14.591240960+00:00  INFO     LDAP request [ 38.1ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.591366169+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:14.629829377+00:00  INFO     LDAP request [ 655µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.631043294+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:14.631605085+00:00  INFO     LDAP request [ 6.33µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.631990002+00:00  INFO     ｉ [info]: LDAP session start: 3eb1bd3d-87c3-430b-bf1c-70d3c0213eaa
+2026-04-21T11:18:14.632136127+00:00  INFO     LDAP request [ 30.0ms | 100.00% ] session_id: 3eb1bd3d-87c3-430b-bf1c-70d3c0213eaa
+2026-04-21T11:18:14.632227752+00:00  INFO     ┝━ ｉ [info]: Login attempt for "bob"
+2026-04-21T11:18:14.662126044+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:18:14.662129502+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "bob"
+2026-04-21T11:18:14.662485960+00:00  INFO     ｉ [info]: LDAP session end: 3eb1bd3d-87c3-430b-bf1c-70d3c0213eaa
+2026-04-21T11:18:14.751787460+00:00  INFO     LDAP request [ 39.2ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.751914877+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:14.791545585+00:00  INFO     LDAP request [ 665µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.792765710+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:14.793169252+00:00  INFO     LDAP request [ 8.08µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.794053419+00:00  INFO     ｉ [info]: LDAP session start: 10af5aa9-da95-414c-9ccc-89583e4c9e1a
+2026-04-21T11:18:14.794305335+00:00  INFO     LDAP request [ 31.5ms | 100.00% ] session_id: 10af5aa9-da95-414c-9ccc-89583e4c9e1a
+2026-04-21T11:18:14.794433835+00:00  INFO     ┝━ ｉ [info]: Login attempt for "carol"
+2026-04-21T11:18:14.825811960+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:18:14.825817794+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "carol"
+2026-04-21T11:18:14.826246960+00:00  INFO     ｉ [info]: LDAP session end: 10af5aa9-da95-414c-9ccc-89583e4c9e1a
+2026-04-21T11:18:14.921725377+00:00  INFO     LDAP request [ 37.7ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.921864335+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:14.959922419+00:00  INFO     LDAP request [ 641µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.961147210+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:14.961470460+00:00  INFO     LDAP request [ 7.33µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:14.963347252+00:00  INFO     ｉ [info]: LDAP session start: 847349ce-50d3-4227-85e1-7e0138f246f3
+2026-04-21T11:18:14.963556919+00:00  INFO     LDAP request [ 29.8ms | 100.00% ] session_id: 847349ce-50d3-4227-85e1-7e0138f246f3
+2026-04-21T11:18:14.963642669+00:00  INFO     ┝━ ｉ [info]: Login attempt for "dave"
+2026-04-21T11:18:14.993293002+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:18:14.993297960+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "dave"
+2026-04-21T11:18:14.993668460+00:00  INFO     ｉ [info]: LDAP session end: 847349ce-50d3-4227-85e1-7e0138f246f3
+2026-04-21T11:18:15.085891085+00:00  INFO     LDAP request [ 44.0ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:15.086035669+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:15.130382460+00:00  INFO     LDAP request [ 559µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:15.131212044+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:15.131536127+00:00  INFO     LDAP request [ 9.04µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:15.132856544+00:00  INFO     ｉ [info]: LDAP session start: 00821fcc-1a8e-4654-8ca4-720904cd3831
+2026-04-21T11:18:15.133404960+00:00  INFO     LDAP request [ 34.9ms | 100.00% ] session_id: 00821fcc-1a8e-4654-8ca4-720904cd3831
+2026-04-21T11:18:15.133522127+00:00  INFO     ┝━ ｉ [info]: Login attempt for "eve"
+2026-04-21T11:18:15.168244211+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:18:15.168248419+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "eve"
+2026-04-21T11:18:15.168624336+00:00  INFO     ｉ [info]: LDAP session end: 00821fcc-1a8e-4654-8ca4-720904cd3831
+2026-04-21T11:18:15.259031419+00:00  INFO     LDAP request [ 38.1ms | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:15.259180294+00:00  INFO     ┕━ ｉ [info]: Login attempt for "admin"
+2026-04-21T11:18:15.297695669+00:00  INFO     LDAP request [ 638µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:15.298861461+00:00  WARN     ┕━ 🚧 [warn]: Ignoring unrecognized user attribute: pwdchangedtime. To disable this warning, add it to "ignored_user_attributes" in the config.
+2026-04-21T11:18:15.299168377+00:00  INFO     LDAP request [ 6.38µs | 100.00% ] session_id: 1151b70c-c27b-4963-97ac-ff6b17543928
+2026-04-21T11:18:15.299839127+00:00  INFO     ｉ [info]: LDAP session start: b909e109-ad93-402d-bca9-d3752561be3a
+2026-04-21T11:18:15.300012086+00:00  INFO     LDAP request [ 30.9ms | 100.00% ] session_id: b909e109-ad93-402d-bca9-d3752561be3a
+2026-04-21T11:18:15.300133669+00:00  INFO     ┝━ ｉ [info]: Login attempt for "mallory"
+2026-04-21T11:18:15.330914086+00:00  ERROR    ┝━ 🚨 [error]:  | error: Authentication protocol error for `Protocol error: `This error results from an error during password verification``
+2026-04-21T11:18:15.330918794+00:00  ERROR    ┕━ 🚨 [error]:  | error: Authentication error for user "mallory"
+2026-04-21T11:18:15.331591377+00:00  INFO     ｉ [info]: LDAP session end: b909e109-ad93-402d-bca9-d3752561be3a
